@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
 * Студент: [kirill_oschepkov](https://up.htmlacademy.ru/univer-js3/3/user/2432567).
-* Наставник: `Неизвестно`.
+* Наставник: [Владимир Ульянов](https://htmlacademy.ru/profile/lionskape).
 
 ---
 
