@@ -1,9 +1,9 @@
 // import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import DataFilm from './types/data-film/data-film';
+import { Film } from './types';
 
-const films: ReadonlyArray<DataFilm> = [
+const films: ReadonlyArray<Film> = [
   {
     name: 'The Grand Budapest Hotel poster',
     pathImg: 'img/the-grand-budapest-hotel-poster.jpg',

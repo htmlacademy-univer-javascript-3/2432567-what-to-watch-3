@@ -1,8 +1,7 @@
-import DataFilm from '../../types/data-film/data-film';
-
+import { Film } from '../../types';
 
 function FilmPromo({ film }: {
-  film: DataFilm;
+  film: Film;
 }): JSX.Element {
   return (
     <div className="film-card__info">

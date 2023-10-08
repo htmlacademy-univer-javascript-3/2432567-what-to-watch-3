@@ -1,7 +1,7 @@
-import DataFilm from '../../types/data-film/data-film';
+import { Film } from '../../types';
 
 function FilmCard({ film }: {
-  film: DataFilm;
+  film: Film;
 }): JSX.Element {
   return (
     <article className="small-film-card catalog__films-card">
