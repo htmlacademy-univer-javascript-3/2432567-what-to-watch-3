@@ -1,7 +1,7 @@
 // import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/App';
-import DataFilm from './types/data-film.tsx/data-film';
+import App from './components/app/app';
+import DataFilm from './types/data-film/data-film';
 
 const films: ReadonlyArray<DataFilm> = [
   {
@@ -92,10 +92,14 @@ const films: ReadonlyArray<DataFilm> = [
   },
 ];
 
+// ВОПРОС: Где хранить данные? Как прокидывать данные в компоненты?
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 root.render(
-  <App data={films}/>
+  <App data={films} />
 );
+
+// ВОПРОС: Строение папок, архитектура приложения. В чем разница папок public и dist?

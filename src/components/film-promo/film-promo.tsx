@@ -1,4 +1,4 @@
-import DataFilm from '../../types/data-film.tsx/data-film';
+import DataFilm from '../../types/data-film/data-film';
 
 
 function FilmPromo({ film }: {

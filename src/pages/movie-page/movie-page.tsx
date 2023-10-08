@@ -2,17 +2,11 @@ function MoviePage(): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
-        {/*
-  Нет необходимости копировать данный блок в компоненты. Блок с `svg`-изображениями
-  присутствует в разметке файла `index.html`.
-*/}
-        {/* inject:svg */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
         >
           <symbol id="add" viewBox="0 0 19 20">
-            {/* Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch */}
             <title>+</title>
             <desc>Created with Sketch.</desc>
             <g

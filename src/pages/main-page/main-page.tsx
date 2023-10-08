@@ -1,8 +1,8 @@
 import FilmCard from '../../components/film-card/film-card';
 import FilmPromo from '../../components/film-promo/film-promo';
-import DataFilm from '../../types/data-film.tsx/data-film';
+import { Film } from '../../types';
 
-function MainPage({ films }: { films: ReadonlyArray<DataFilm> }): JSX.Element {
+function MainPage({ films }: { films: ReadonlyArray<Film> }): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
