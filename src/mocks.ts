@@ -1,6 +1,6 @@
-import DataFilm from './types/data-film.tsx/data-film';
+import { Film } from './types';
 
-const Films: ReadonlyArray<DataFilm> = [
+const Films: ReadonlyArray<Film> = [
   {
     name: 'The Grand Budapest Hotel poster',
     pathImg: 'img/the-grand-budapest-hotel-poster.jpg',
