@@ -1,14 +1,12 @@
 import { Film } from '../../types';
 
 
-function FilmPromo({ film }: {
-  film: Film;
-}): JSX.Element {
+function FilmPromo({ film }: { film: Film }): JSX.Element {
   return (
     <div className="film-card__info">
       <div className="film-card__poster">
         <img
-          src={film.pathImg}
+          src={film.posterImg}
           alt={film.name}
           width={218}
           height={327}
@@ -18,7 +16,7 @@ function FilmPromo({ film }: {
         <h2 className="film-card__title">{film.name}</h2>
         <p className="film-card__meta">
           <span className="film-card__genre">{film.genre || ''}</span>
-          <span className="film-card__year">{film.date || ''}</span>
+          <span className="film-card__year">{film.released || ''}</span>
         </p>
         <div className="film-card__buttons">
           <button className="btn btn--play film-card__button" type="button">

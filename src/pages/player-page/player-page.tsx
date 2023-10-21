@@ -1,7 +1,13 @@
-function PlayerPage(): JSX.Element {
+import { useParams } from 'react-router-dom';
+import { Film, Films } from '../../types';
+
+function PlayerPage({ films }: Films): JSX.Element {
+  const { id } = useParams();
+  const film = films.find((item) => item.id === id) as Film;
+
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg" />
+      <video src={film.videoLink} className="player__video" poster={film.bgImg} />
       <button type="button" className="player__exit">
         Exit
       </button>

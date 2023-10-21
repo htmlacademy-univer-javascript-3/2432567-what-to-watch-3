@@ -7,34 +7,34 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import { Film } from '../../types';
+import { Films } from '../../types';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 
-export default function App({ data }: { data: ReadonlyArray<Film> }) {
+export default function App({ films }: Films) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<MainPage films={data} />} />
+        <Route path={AppRoute.Main} element={<MainPage films={films} />} />
         <Route path={AppRoute.SignIn} element={<SignInPage />} />
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListPage />
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <MyListPage films={films} />
             </PrivateRoute>
           }
         />
         <Route path={AppRoute.Film}>
           <Route index element={<NotFoundPage />} />
-          <Route path='/:id'>
-            <Route index element={<MoviePage />} />
-            <Route path='/review' element={<AddReviewPage />} />
+          <Route path=':id'>
+            <Route index element={<MoviePage films={films}/>} />
+            <Route path='review' element={<AddReviewPage films={films}/>} />
           </Route>
         </Route>
         <Route path={AppRoute.Player}>
           <Route index element={<NotFoundPage />} />
-          <Route path='/:id' element={<PlayerPage />} />
+          <Route path=':id' element={<PlayerPage films={films}/>} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

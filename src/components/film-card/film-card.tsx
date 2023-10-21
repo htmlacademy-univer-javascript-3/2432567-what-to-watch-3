@@ -1,22 +1,29 @@
+import { Link } from 'react-router-dom';
 import { Film } from '../../types';
 
-function FilmCard({ film }: {
+type FilmCardProps = {
   film: Film;
-}): JSX.Element {
+  onMouseOver: () => void;
+}
+
+function FilmCard({ film, onMouseOver }: FilmCardProps): JSX.Element {
   return (
-    <article className="small-film-card catalog__films-card">
+    <article
+      className="small-film-card catalog__films-card"
+      onMouseOver={() => onMouseOver()}
+    >
       <div className="small-film-card__image">
         <img
-          src={film.pathImg}
+          src={film.posterImg}
           alt={film.name}
           width="280"
           height="175"
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>
           {film.name}
-        </a>
+        </Link>
       </h3>
     </article>
   );
