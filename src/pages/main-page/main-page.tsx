@@ -1,10 +1,11 @@
-import FilmCard from '../../components/film-card/film-card';
+import FilmsList from '../../components/film-list/film-list';
 import FilmPromo from '../../components/film-promo/film-promo';
 import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
-import { Film } from '../../types';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
+import { Films } from '../../types';
 
-function MainPage({ films }: { films: ReadonlyArray<Film> }): JSX.Element {
+function MainPage({ films }: Films): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -15,7 +16,10 @@ function MainPage({ films }: { films: ReadonlyArray<Film> }): JSX.Element {
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
-        <Header />
+        <header className="page-header film-card__head">
+          <Logo />
+          <UserBlock />
+        </header>
         <div className="film-card__wrap">
           <FilmPromo film={films[0]} />
         </div>
@@ -75,18 +79,7 @@ function MainPage({ films }: { films: ReadonlyArray<Film> }): JSX.Element {
               </a>
             </li>
           </ul>
-          <div className="catalog__films-list">
-            {
-              films
-                .slice(1)
-                .map((film) => (
-                  <FilmCard
-                    key={film.name}
-                    film={film}
-                  />
-                ))
-            }
-          </div>
+          <FilmsList films={films.slice(1)} />
           <div className="catalog__more">
             <button className="catalog__button" type="button">
               Show more
