@@ -13,7 +13,7 @@ function AddReviewPage({ films }: Films): JSX.Element {
       <div className="film-card__header">
         <div className="film-card__bg">
           <img
-            src={film.bgImg}
+            src={film.bg}
             alt={film.name}
           />
         </div>
@@ -36,7 +36,7 @@ function AddReviewPage({ films }: Films): JSX.Element {
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={film.posterImg}
+            src={film.poster}
             alt={film.name}
             width="218"
             height="327"

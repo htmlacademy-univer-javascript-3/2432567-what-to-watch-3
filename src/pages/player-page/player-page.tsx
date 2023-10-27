@@ -7,7 +7,7 @@ function PlayerPage({ films }: Films): JSX.Element {
 
   return (
     <div className="player">
-      <video src={film.videoLink} className="player__video" poster={film.bgImg} />
+      <video src={film.linkVideo} className="player__video" poster={film.bg} />
       <button type="button" className="player__exit">
         Exit
       </button>

@@ -16,7 +16,7 @@ function MoviePage({ films }: Films): JSX.Element {
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img
-              src={film.bgImg}
+              src={film.bg}
               alt={film.name}
             />
           </div>
@@ -57,7 +57,7 @@ function MoviePage({ films }: Films): JSX.Element {
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
               <img
-                src={film.posterImg}
+                src={film.poster}
                 alt={film.name}
                 width={218}
                 height={327}

@@ -3,7 +3,19 @@ import FilmCard from '../film-card/film-card';
 import { useState } from 'react';
 
 export default function FilmsList({ films, count = -1 }: Films & { count?: number }) {
-  const [acitveFilm, setActiveFilm] = useState({});
+  const [acitveFilm, setActiveFilm] = useState('');
+  let timer: NodeJS.Timeout;
+
+  const handlerMouseOver = (film: Film) => {
+    timer = setTimeout(() => {
+      setActiveFilm(film.id);
+    }, 1000);
+  };
+
+  const handlerMouseOut = () => {
+    clearTimeout(timer);
+    setActiveFilm('');
+  };
 
   return (
     <div className="catalog__films-list">
@@ -14,10 +26,9 @@ export default function FilmsList({ films, count = -1 }: Films & { count?: numbe
             <FilmCard
               key={film.id}
               film={film}
-              onMouseOver={() => {
-                setActiveFilm(film);
-                return acitveFilm;
-              }}
+              isPlaying={film.id === acitveFilm}
+              onMouseOver={handlerMouseOver}
+              onMouseOut={handlerMouseOut}
             />
           ))
       }
