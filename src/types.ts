@@ -1,23 +1,15 @@
-import { AuthorizationStatus } from './const';
-
-
 type Film = {
   id: string;
   name: string;
-  posterImg: string;
-  bgImg?: string;
+  poster: string;
+  bg?: string;
   genre?: string;
   released?: string;
-  videoLink: string;
+  linkVideo: string;
 }
 
 type Films = { films: ReadonlyArray<Film> }
 
-type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
-  children: JSX.Element;
-}
-
-export type { Film, Films, PrivateRouteProps };
+export type { Film, Films };
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?
