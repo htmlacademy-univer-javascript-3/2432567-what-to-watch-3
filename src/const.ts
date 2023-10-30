@@ -12,4 +12,10 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AppRoute, AuthorizationStatus };
+enum TabsType {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews'
+}
+
+export { AppRoute, AuthorizationStatus, TabsType };
