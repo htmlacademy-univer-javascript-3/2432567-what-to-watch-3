@@ -1,5 +1,5 @@
 import { Genre, Genres } from '../../mocks/genres';
-import { setGenreAction, loadFilmsByGenreAction } from '../../store/action';
+import { setGenreAction } from '../../store/action';
 import GenreLink from '../genre-link/genre-link';
 import { useAppDispatch, useAppSelector } from '../../hooks/genres';
 
@@ -13,7 +13,6 @@ function GenreList({ genres }: GenreListProps) {
 
   const handlerOnClick = (genre: string) => {
     dispatch(setGenreAction({ genre }));
-    dispatch(loadFilmsByGenreAction());
   };
 
   return (
