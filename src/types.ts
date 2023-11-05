@@ -1,3 +1,5 @@
+import { store } from './store';
+
 type Film = {
   id: string;
   name: string;
@@ -26,7 +28,9 @@ type Review = {
 
 type Reviews = { reviews: ReadonlyArray<Review> }
 
+type AppDispatch = typeof store.dispatch;
+type State = ReturnType<typeof store.getState>;
 
-export type { Film, Films, Review, Reviews };
+export type { Film, Films, Review, Reviews, AppDispatch, State };
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?

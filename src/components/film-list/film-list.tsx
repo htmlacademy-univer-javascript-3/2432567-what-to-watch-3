@@ -1,10 +1,13 @@
+import { useAppSelector } from '../../hooks/genres';
 import { Film, Films } from '../../types';
 import FilmCard from '../film-card/film-card';
 import { useState } from 'react';
+import ShowMoreButton from '../show-more-btn/show-more-btn';
 
-export default function FilmsList({ films, count = -1 }: Films & { count?: number }) {
+export default function FilmsList({ films }: Films) {
   const [acitveFilm, setActiveFilm] = useState('');
   let timer: NodeJS.Timeout;
+  const countFilmsShown = useAppSelector((state) => state.countFilmsShown) as number;
 
   const handlerMouseOver = (film: Film) => {
     timer = setTimeout(() => {
@@ -18,20 +21,23 @@ export default function FilmsList({ films, count = -1 }: Films & { count?: numbe
   };
 
   return (
-    <div className="catalog__films-list">
-      {
-        films
-          .slice(0, (count > films.length) || count === -1 ? films.length : count)
-          .map((film: Film) => (
-            <FilmCard
-              key={film.id}
-              film={film}
-              isPlaying={film.id === acitveFilm}
-              onMouseOver={handlerMouseOver}
-              onMouseOut={handlerMouseOut}
-            />
-          ))
-      }
-    </div >
+    <>
+      <div className="catalog__films-list">
+        {
+          films
+            .slice(0, countFilmsShown > films.length ? films.length : countFilmsShown)
+            .map((film: Film) => (
+              <FilmCard
+                key={film.id}
+                film={film}
+                isPlaying={film.id === acitveFilm}
+                onMouseOver={handlerMouseOver}
+                onMouseOut={handlerMouseOut}
+              />
+            ))
+        }
+      </div>
+      {countFilmsShown < films.length && <ShowMoreButton />}
+    </>
   );
 }

@@ -64,7 +64,7 @@ function MoviePage({ films }: Films): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.filter((item) => item !== film && item.genre === film.genre)} count={3} />
+          <FilmsList films={films.filter((item) => item !== film && item.genre === film.genre)} />
         </section>
         <Footer />
       </div>
