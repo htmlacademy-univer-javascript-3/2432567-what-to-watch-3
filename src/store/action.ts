@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 
 const setGenreAction = createAction<{ genre: string }>('setGenre');
-const loadFilmsByGenreAction = createAction('loadFilmsByGenre');
 const showMoreFilmsAction = createAction('showMoreFilms');
+const showMoreDefaultAction = createAction('showMoreDefault');
 
-export { setGenreAction, loadFilmsByGenreAction, showMoreFilmsAction };
+export { setGenreAction, showMoreFilmsAction, showMoreDefaultAction };
