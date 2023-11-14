@@ -2,14 +2,16 @@ import { Link, useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { Film, Films } from '../../types';
+import { Film } from '../../types';
 import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
-import Tabs from '../../components/tabs/tabs';
 import { reviews } from '../../mocks/reviews';
+import { useAppSelector } from '../../store/hooks';
+import Tabs from '../../components/tabs/tabs';
 
-function MoviePage({ films }: Films): JSX.Element {
+function MoviePage(): JSX.Element {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films) as Film[];
   const film = films.find((item) => item.id === id) as Film;
 
   return (
@@ -17,7 +19,7 @@ function MoviePage({ films }: Films): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film.bg} alt={film.name} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
           <h1 className="visually-hidden">WTW</h1>
           <header className="page-header film-card__head">
@@ -55,7 +57,7 @@ function MoviePage({ films }: Films): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src={film.poster} alt={film.name} width={218} height={327} />
+              <img src={film.posterImage} alt={film.name} width={218} height={327} />
             </div>
             <Tabs film={film} reviews={reviews} />
           </div>

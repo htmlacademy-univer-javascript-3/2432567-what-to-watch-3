@@ -11,8 +11,8 @@ function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): 
     >
       <div className="small-film-card__image">
         <PreviewVideo
-          linkVideo={film.linkVideo}
-          linkPoster={film.poster}
+          linkVideo={film.videoLink}
+          linkPoster={film.posterImage}
           isPlaying={isPlaying}
         />
       </div>

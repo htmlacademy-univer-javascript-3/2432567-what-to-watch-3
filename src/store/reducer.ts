@@ -1,33 +1,53 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setGenreAction, showMoreDefaultAction, showMoreFilmsAction } from './action';
-import { Film } from '../types';
-import { Genre } from '../mocks/genres';
-import { films } from '../mocks/films';
+import {
+  addShownFilmsAction,
+  defaultShownFilmsAction,
+  filmsLoadStatusAction,
+  loadFilmsAction,
+  setActiveGenreAction,
+} from './action';
+import { FilmInList, Genre } from '../types';
 
 type initialStateProps = {
-  genre: Genre;
-  films: Film[];
-  countFilmsShown: number;
+  activeGenre: string;
+  genres: string[];
+  activeFilm: FilmInList[];
+  films: FilmInList[];
+  countShownFilms: number;
+  statusLoadingFilms: boolean;
 }
 
 const initialState: initialStateProps = {
-  genre: 'All genres',
-  films: films as Film[],
-  countFilmsShown: 8,
+  activeGenre: 'All genres',
+  genres: [],
+  activeFilm: [],
+  films: [],
+  countShownFilms: 8,
+  statusLoadingFilms: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(setGenreAction, (state, action) => {
-      state.genre = action.payload.genre;
-      state.films = state.genre === 'All genres' ? films as Film[] : films.filter((film) => film.genre === state.genre);
-      state.countFilmsShown = 8;
+    .addCase(setActiveGenreAction, (state, action) => {
+      state.activeGenre = action.payload;
+      state.activeFilm = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === state.activeGenre);
     })
-    .addCase(showMoreFilmsAction, (state) => {
-      state.countFilmsShown += 8;
+    .addCase(addShownFilmsAction, (state) => {
+      state.countShownFilms += 8;
     })
-    .addCase(showMoreDefaultAction, (state) => {
-      state.countFilmsShown = 8;
+    .addCase(defaultShownFilmsAction, (state) => {
+      state.countShownFilms = 8;
+    })
+    .addCase(loadFilmsAction, (state, action) => {
+      state.films = action.payload;
+      state.activeFilm = action.payload;
+
+      const genres = new Set<Genre>(['All genres']);
+      action.payload.forEach((film) => genres.add(film.genre));
+      state.genres = Array.from(genres).slice(0, 9);
+    })
+    .addCase(filmsLoadStatusAction, (state, action) => {
+      state.statusLoadingFilms = action.payload;
     });
 });
 

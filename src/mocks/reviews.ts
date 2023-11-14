@@ -1,6 +1,6 @@
 import { Review } from '../types';
 
-const reviews: readonly Review[] = [
+const reviews: Review[] = [
   {
     username: 'Kate Muir',
     text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director&#39;s funniest and most exquisitely designed films in years.',

@@ -5,21 +5,17 @@ import Footer from '../../components/footer/footer';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { useAppDispatch, useAppSelector } from '../../hooks/genres';
-import { Genres } from '../../mocks/genres';
-import { showMoreDefaultAction } from '../../store/action';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { defaultShownFilmsAction } from '../../store/action';
 import { Film } from '../../types';
 
-type MainPageProps = {
-  genres: Genres;
-}
 
-function MainPage({ genres }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const films = useAppSelector((state) => state.films) as Film[];
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(showMoreDefaultAction());
+    dispatch(defaultShownFilmsAction());
   }, [dispatch]);
 
   return (
@@ -43,7 +39,7 @@ function MainPage({ genres }: MainPageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList genres={genres} />
+          <GenreList />
           <FilmsList films={films.slice(1)} />
         </section>
         <Footer />

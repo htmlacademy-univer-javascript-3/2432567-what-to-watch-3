@@ -1,7 +1,8 @@
-import { Film, Reviews } from '../../types';
+import { Film, Review } from '../../types';
 
 type TabsProps = {
   film: Film;
-} & Reviews
+  reviews: Review[];
+}
 
 export type { TabsProps };
