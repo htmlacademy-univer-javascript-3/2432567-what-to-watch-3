@@ -1,19 +1,22 @@
 import { Link, useParams } from 'react-router-dom';
-import { Film, Films } from '../../types';
+import { Film } from '../../types';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
+import { useAppSelector } from '../../store/hooks';
 
-function AddReviewPage({ films }: Films): JSX.Element {
+function AddReviewPage(): JSX.Element {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films) as Film[];
   const film = films.find((item) => item.id === id) as Film;
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
           <img
-            src={film.bg}
+            src={film.backgroundImage}
             alt={film.name}
           />
         </div>
@@ -36,7 +39,7 @@ function AddReviewPage({ films }: Films): JSX.Element {
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img
-            src={film.poster}
+            src={film.posterImage}
             alt={film.name}
             width="218"
             height="327"

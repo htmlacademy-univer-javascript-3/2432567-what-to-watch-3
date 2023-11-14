@@ -1,24 +1,25 @@
-import { Genre, Genres } from '../../mocks/genres';
-import { setGenreAction } from '../../store/action';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import GenreLink from '../genre-link/genre-link';
-import { useAppDispatch, useAppSelector } from '../../hooks/genres';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { Genre } from '../../types';
+import { defaultShownFilmsAction, setActiveGenreAction } from '../../store/action';
 
-type GenreListProps = {
-  genres: Genres;
-}
-
-function GenreList({ genres }: GenreListProps) {
-  const activeGenre = useAppSelector((state) => state.genre) as Genre;
+function GenreList(): JSX.Element {
+  const genres = useAppSelector((state) => state.genres) as Genre[];
+  const activeGenre = useAppSelector((state) => state.activeGenre) as Genre;
   const dispatch = useAppDispatch();
 
-  const handlerOnClick = (genre: string) => {
-    dispatch(setGenreAction({ genre }));
+  const handlerOnClick = (genre: Genre) => {
+    dispatch(setActiveGenreAction(genre));
+    dispatch(defaultShownFilmsAction());
   };
 
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre) =>
-        <GenreLink key={ genre } genre={genre} activeGenre={activeGenre} onClick={handlerOnClick} />
+        <GenreLink key={genre} genre={genre} activeGenre={activeGenre} onClick={handlerOnClick} />
       )}
     </ul>
   );

@@ -1,13 +1,13 @@
-import { useAppSelector } from '../../hooks/genres';
-import { Film, Films } from '../../types';
+import { useAppSelector } from '../../store/hooks';
+import { Film } from '../../types';
 import FilmCard from '../film-card/film-card';
 import { useState } from 'react';
 import ShowMoreButton from '../show-more-btn/show-more-btn';
 
-export default function FilmsList({ films }: Films) {
+export default function FilmsList({ films }: {films: Film[]}) {
   const [acitveFilm, setActiveFilm] = useState('');
   let timer: NodeJS.Timeout;
-  const countFilmsShown = useAppSelector((state) => state.countFilmsShown) as number;
+  const countFilmsShown = useAppSelector((state) => state.countShownFilms) as number;
 
   const handlerMouseOver = (film: Film) => {
     timer = setTimeout(() => {

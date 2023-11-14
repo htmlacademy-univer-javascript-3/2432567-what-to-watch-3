@@ -18,4 +18,8 @@ enum TabsType {
   Reviews = 'Reviews'
 }
 
-export { AppRoute, AuthorizationStatus, TabsType };
+enum APIRoutes {
+  Films = '/films'
+}
+
+export { AppRoute, AuthorizationStatus, TabsType, APIRoutes };

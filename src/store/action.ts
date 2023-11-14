@@ -1,7 +1,18 @@
 import { createAction } from '@reduxjs/toolkit';
+import { FilmInList, Genre } from '../types';
 
-const setGenreAction = createAction<{ genre: string }>('setGenre');
-const showMoreFilmsAction = createAction('showMoreFilms');
-const showMoreDefaultAction = createAction('showMoreDefault');
+const setActiveGenreAction = createAction<Genre>('setGenre');
+const setActiveFilmsAction = createAction<FilmInList[]>('setFilms');
+const addShownFilmsAction = createAction('showMoreFilms');
+const defaultShownFilmsAction = createAction('showMoreDefault');
+const loadFilmsAction = createAction<FilmInList[]>('loadFilms');
+const filmsLoadStatusAction = createAction<boolean>('filmsLoadStatus');
 
-export { setGenreAction, showMoreFilmsAction, showMoreDefaultAction };
+export {
+  setActiveGenreAction,
+  setActiveFilmsAction,
+  addShownFilmsAction,
+  defaultShownFilmsAction,
+  loadFilmsAction,
+  filmsLoadStatusAction,
+};

@@ -1,20 +1,17 @@
 import { Film } from '../../types';
 
-function TabOverview({ film }: { film: Film}): JSX.Element {
+function TabOverview({ film }: { film: Film }): JSX.Element {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{film.ratingScore}</div>
+        <div className="film-rating__score">{film.scoresCount}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{film.ratingLevel}</span>
-          <span className="film-rating__count">{film.ratingCount} rating</span>
+          <span className="film-rating__level">{film.rating}</span>
+          <span className="film-rating__count">{film.rating} rating</span>
         </p>
       </div>
       <div className="film-card__text">
-        {
-          // eslint-disable-next-line react/no-array-index-key
-          film.description?.map((descr, idx) => <p key={idx}>{descr}</p>)
-        }
+        <p>{film.description}</p>
         <p className="film-card__director">
           <strong>Director: {film.director}</strong>
         </p>

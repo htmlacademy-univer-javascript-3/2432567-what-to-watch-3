@@ -1,7 +1,7 @@
-import { Reviews } from '../../types';
+import { Review } from '../../types';
 import ReviewBlock from '../review/review';
 
-function TabReviews({ reviews }: Reviews): JSX.Element {
+function TabReviews({ reviews }: { reviews: Review[] }): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

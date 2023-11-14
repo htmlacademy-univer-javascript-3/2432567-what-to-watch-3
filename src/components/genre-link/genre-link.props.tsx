@@ -1,4 +1,4 @@
-import { Genre } from '../../mocks/genres';
+import { Genre } from '../../types';
 
 type GenreLinkProps = {
   genre: Genre;

@@ -2,9 +2,12 @@ import FilmsList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { Films } from '../../types';
+import { useAppSelector } from '../../store/hooks';
+import { Film } from '../../types';
 
-function MyListPage({ films }: Films): JSX.Element {
+function MyListPage(): JSX.Element {
+  const films = useAppSelector((state) => state.films) as Film[];
+
   return (
     <div className="user-page">
       <header className="page-header film-card__head">

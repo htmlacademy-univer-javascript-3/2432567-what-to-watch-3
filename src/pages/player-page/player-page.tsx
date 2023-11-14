@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { Film, Films } from '../../types';
+import { Film } from '../../types';
+import { useAppSelector } from '../../store/hooks';
 
-function PlayerPage({ films }: Films): JSX.Element {
+function PlayerPage(): JSX.Element {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films) as Film[];
   const film = films.find((item) => item.id === id) as Film;
 
   return (
     <div className="player">
-      <video src={film.linkVideo} className="player__video" poster={film.bg} />
+      <video src={film.videoLink} className="player__video" poster={film.backgroundImage} />
       <button type="button" className="player__exit">
         Exit
       </button>
