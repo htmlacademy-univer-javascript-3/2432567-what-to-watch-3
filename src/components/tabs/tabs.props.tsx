@@ -1,7 +1,6 @@
-import { Film, Review } from '../../types';
+import { Review } from '../../types';
 
 type TabsProps = {
-  film: Film;
   reviews: Review[];
 }
 

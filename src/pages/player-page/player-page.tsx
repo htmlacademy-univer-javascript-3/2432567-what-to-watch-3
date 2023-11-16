@@ -1,11 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { Film } from '../../types';
-import { useAppSelector } from '../../store/hooks';
+import { FilmType } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchFilmAction } from '../../store/api-action';
 
 function PlayerPage(): JSX.Element {
   const { id } = useParams();
-  const films = useAppSelector((state) => state.films) as Film[];
-  const film = films.find((item) => item.id === id) as Film;
+
+  const dispatch = useAppDispatch();
+  dispatch(fetchFilmAction(id as string));
+
+  const film = useAppSelector((state) => state.film) as FilmType; //unfinished
 
   return (
     <div className="player">

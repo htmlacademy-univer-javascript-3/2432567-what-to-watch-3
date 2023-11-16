@@ -1,15 +1,20 @@
 import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../types';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchFilmAction } from '../../store/api-action';
+import { FilmType } from '../../types';
 
 function AddReviewPage(): JSX.Element {
   const { id } = useParams();
-  const films = useAppSelector((state) => state.films) as Film[];
-  const film = films.find((item) => item.id === id) as Film;
+
+  const dispatch = useAppDispatch();
+  dispatch(fetchFilmAction(id as string));
+  setTimeout(() => null, 1000);
+
+  const film = useAppSelector((state) => state.film) as FilmType; // unfinished, i think that the problem is async
 
   return (
     <section className="film-card film-card--full">

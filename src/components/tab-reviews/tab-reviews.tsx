@@ -6,8 +6,7 @@ function TabReviews({ reviews }: { reviews: Review[] }): JSX.Element {
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
         {
-          // eslint-disable-next-line react/no-array-index-key
-          reviews.map((review, idx) => <ReviewBlock review={review} key={idx} />)
+          reviews.map((review) => <ReviewBlock review={review} key={review.id} />)
         }
       </div>
     </div>

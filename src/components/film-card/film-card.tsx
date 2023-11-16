@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PreviewVideo from '../preview-video/preview-video';
 import { FilmCardProps } from './film.props';
+import { AppRoute } from '../../const';
 
 function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): JSX.Element {
   return (
@@ -11,13 +12,13 @@ function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): 
     >
       <div className="small-film-card__image">
         <PreviewVideo
-          linkVideo={film.videoLink}
-          linkPoster={film.posterImage}
+          linkVideo={film.previewVideoLink}
+          linkPoster={film.previewImage}
           isPlaying={isPlaying}
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>
+        <Link className="small-film-card__link" to={`${AppRoute.Film}/${film.id}`}>
           {film.name}
         </Link>
       </h3>

@@ -1,6 +1,6 @@
 import store from './store';
 
-type FilmInList = {
+type FilmInListType = {
   id: string;
   name: string;
   previewImage: string;
@@ -8,7 +8,7 @@ type FilmInList = {
   genre: string;
 }
 
-type Film = {
+type FilmType = {
   id: string;
   name: string;
   posterImage: string;
@@ -26,7 +26,7 @@ type Film = {
   isFavorite: boolean;
 }
 
-type FilmPromo = {
+type FilmPromoType = {
   id: string;
   name: string;
   posterImage: string;
@@ -40,6 +40,7 @@ type FilmPromo = {
 type Genre = string;
 
 type Review = {
+  id: string;
   username: string;
   text: string;
   ratingScore: string;
@@ -49,6 +50,6 @@ type Review = {
 type AppDispatch = typeof store.dispatch;
 type State = ReturnType<typeof store.getState>;
 
-export type { Film, FilmInList, FilmPromo, Review, AppDispatch, State, Genre };
+export type { FilmType, FilmInListType, FilmPromoType, Review, AppDispatch, State, Genre };
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?

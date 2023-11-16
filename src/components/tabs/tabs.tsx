@@ -6,7 +6,7 @@ import TabOverview from '../tab-overview/tab-overview';
 import TabDetails from '../tab-details/tab-details';
 import TabReviews from '../tab-reviews/tab-reviews';
 
-function Tabs({ film, reviews }: TabsProps): JSX.Element {
+function Tabs({ reviews }: TabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState<TabsType>(TabsType.Overview);
   const handlerOnClick = (evt: SyntheticEvent) => {
     const newTab = evt.currentTarget.id as TabsType;
@@ -16,8 +16,8 @@ function Tabs({ film, reviews }: TabsProps): JSX.Element {
   };
 
   const tabs = {
-    [TabsType.Overview]: <TabOverview film={film} />,
-    [TabsType.Details]: <TabDetails film={film} />,
+    [TabsType.Overview]: <TabOverview />,
+    [TabsType.Details]: <TabDetails />,
     [TabsType.Reviews]: <TabReviews reviews={reviews} />,
   };
 

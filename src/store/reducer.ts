@@ -3,16 +3,20 @@ import {
   addShownFilmsAction,
   defaultShownFilmsAction,
   filmsLoadStatusAction,
+  loadFilmAction,
+  loadFilmPromoAction,
   loadFilmsAction,
   setActiveGenreAction,
 } from './action';
-import { FilmInList, Genre } from '../types';
+import { FilmInListType, FilmPromoType, FilmType, Genre } from '../types';
 
 type initialStateProps = {
   activeGenre: string;
   genres: string[];
-  activeFilm: FilmInList[];
-  films: FilmInList[];
+  film: FilmType | null;
+  shownFilms: FilmInListType[];
+  films: FilmInListType[];
+  filmPromo: FilmPromoType | null;
   countShownFilms: number;
   statusLoadingFilms: boolean;
 }
@@ -20,8 +24,10 @@ type initialStateProps = {
 const initialState: initialStateProps = {
   activeGenre: 'All genres',
   genres: [],
-  activeFilm: [],
+  film: null,
+  shownFilms: [],
   films: [],
+  filmPromo: null,
   countShownFilms: 8,
   statusLoadingFilms: false,
 };
@@ -30,7 +36,7 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveGenreAction, (state, action) => {
       state.activeGenre = action.payload;
-      state.activeFilm = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === state.activeGenre);
+      state.shownFilms = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === state.activeGenre);
     })
     .addCase(addShownFilmsAction, (state) => {
       state.countShownFilms += 8;
@@ -40,11 +46,17 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilmsAction, (state, action) => {
       state.films = action.payload;
-      state.activeFilm = action.payload;
+      state.shownFilms = action.payload;
 
       const genres = new Set<Genre>(['All genres']);
       action.payload.forEach((film) => genres.add(film.genre));
       state.genres = Array.from(genres).slice(0, 9);
+    })
+    .addCase(loadFilmPromoAction, (state, action) => {
+      state.filmPromo = action.payload;
+    })
+    .addCase(loadFilmAction, (state, action) => {
+      state.film = action.payload;
     })
     .addCase(filmsLoadStatusAction, (state, action) => {
       state.statusLoadingFilms = action.payload;

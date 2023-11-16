@@ -3,7 +3,7 @@ enum AppRoute {
   SignIn = '/login',
   MyList = '/myList',
   Film = '/films',
-  Player = '/player/:id',
+  Player = '/player',
 }
 
 enum AuthorizationStatus {
@@ -19,7 +19,9 @@ enum TabsType {
 }
 
 enum APIRoutes {
-  Films = '/films'
+  Films = '/films',
+  Promo = '/promo',
+  Film = '/films'
 }
 
 export { AppRoute, AuthorizationStatus, TabsType, APIRoutes };
