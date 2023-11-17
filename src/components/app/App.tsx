@@ -1,16 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import * as pages from './all-pages';
-import Loading from '../loading/loading';
-import { useAppSelector } from '../../store/hooks';
 
 export default function App() {
-  const isFilmsLoad = useAppSelector((state) => (state.statusLoadingFilms));
-  if (isFilmsLoad) {
-    return (
-      <Loading />
-    );
-  }
   return (
     <BrowserRouter>
       <Routes>

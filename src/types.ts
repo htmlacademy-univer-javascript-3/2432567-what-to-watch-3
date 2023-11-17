@@ -41,10 +41,10 @@ type Genre = string;
 
 type Review = {
   id: string;
-  username: string;
-  text: string;
-  ratingScore: string;
   date: string;
+  user: string;
+  comment: string;
+  rating: number;
 }
 
 type AppDispatch = typeof store.dispatch;

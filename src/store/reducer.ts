@@ -2,13 +2,14 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   addShownFilmsAction,
   defaultShownFilmsAction,
-  filmsLoadStatusAction,
+  loadStatusAction,
   loadFilmAction,
   loadFilmPromoAction,
   loadFilmsAction,
   setActiveGenreAction,
+  loadReviewsAction,
 } from './action';
-import { FilmInListType, FilmPromoType, FilmType, Genre } from '../types';
+import { FilmInListType, FilmPromoType, FilmType, Genre, Review } from '../types';
 
 type initialStateProps = {
   activeGenre: string;
@@ -18,7 +19,8 @@ type initialStateProps = {
   films: FilmInListType[];
   filmPromo: FilmPromoType | null;
   countShownFilms: number;
-  statusLoadingFilms: boolean;
+  statusLoading: boolean;
+  reviews: Review[];
 }
 
 const initialState: initialStateProps = {
@@ -29,7 +31,8 @@ const initialState: initialStateProps = {
   films: [],
   filmPromo: null,
   countShownFilms: 8,
-  statusLoadingFilms: false,
+  statusLoading: false,
+  reviews: [],
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -58,8 +61,11 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilmAction, (state, action) => {
       state.film = action.payload;
     })
-    .addCase(filmsLoadStatusAction, (state, action) => {
-      state.statusLoadingFilms = action.payload;
+    .addCase(loadStatusAction, (state, action) => {
+      state.statusLoading = action.payload;
+    })
+    .addCase(loadReviewsAction, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 

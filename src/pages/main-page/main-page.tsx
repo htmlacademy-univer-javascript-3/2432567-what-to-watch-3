@@ -5,8 +5,9 @@ import Footer from '../../components/footer/footer';
 import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { defaultShownFilmsAction } from '../../store/action';
+import Loading from '../../components/loading/loading';
 
 
 function MainPage(): JSX.Element {
@@ -16,6 +17,12 @@ function MainPage(): JSX.Element {
     dispatch(defaultShownFilmsAction());
   }, [dispatch]);
 
+  const isFilmsLoad = useAppSelector((state) => (state.statusLoading));
+  if (isFilmsLoad) {
+    return (
+      <Loading />
+    );
+  }
   return (
     <>
       <section className="film-card">

@@ -4,20 +4,26 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
-import { reviews } from '../../mocks/reviews';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
 import { fetchFilmAction } from '../../store/api-action';
 import { FilmType } from '../../types';
+import { useEffect } from 'react';
+import Loading from '../../components/loading/loading';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
-
   const dispatch = useAppDispatch();
-  dispatch(fetchFilmAction(id as string));
 
-  const film = useAppSelector((state) => state.film) as FilmType; // unfinished, i think that the problem is async
+  const film = useAppSelector((state) => state.film) as FilmType;
 
+  useEffect(() => {
+    dispatch(fetchFilmAction(id as string));
+  }, [dispatch, id]);
+
+  if (!film) {
+    return <Loading />;
+  }
   return (
     <>
       <section className="film-card film-card--full">
@@ -63,7 +69,7 @@ function MoviePage(): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width={218} height={327} />
             </div>
-            <Tabs reviews={reviews} />
+            <Tabs />
           </div>
         </div>
       </section>

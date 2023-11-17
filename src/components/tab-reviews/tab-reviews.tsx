@@ -1,7 +1,18 @@
-import { Review } from '../../types';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { FilmType, Review } from '../../types';
 import ReviewBlock from '../review/review';
+import { fetchReviewsAction } from '../../store/api-action';
 
-function TabReviews({ reviews }: { reviews: Review[] }): JSX.Element {
+function TabReviews(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.film) as FilmType;
+  const reviews = useAppSelector((state) => state.reviews) as Review[];
+
+  useEffect(() => {
+    dispatch(fetchReviewsAction(film.id));
+  }, [dispatch, film]);
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

@@ -1,4 +1,3 @@
-import { TabsProps } from './tabs.props';
 import TabLink from '../tab-link/tab-link';
 import { TabsType } from '../../const';
 import { SyntheticEvent, useState } from 'react';
@@ -6,7 +5,7 @@ import TabOverview from '../tab-overview/tab-overview';
 import TabDetails from '../tab-details/tab-details';
 import TabReviews from '../tab-reviews/tab-reviews';
 
-function Tabs({ reviews }: TabsProps): JSX.Element {
+function Tabs(): JSX.Element {
   const [activeTab, setActiveTab] = useState<TabsType>(TabsType.Overview);
   const handlerOnClick = (evt: SyntheticEvent) => {
     const newTab = evt.currentTarget.id as TabsType;
@@ -18,7 +17,7 @@ function Tabs({ reviews }: TabsProps): JSX.Element {
   const tabs = {
     [TabsType.Overview]: <TabOverview />,
     [TabsType.Details]: <TabDetails />,
-    [TabsType.Reviews]: <TabReviews reviews={reviews} />,
+    [TabsType.Reviews]: <TabReviews />,
   };
 
   return (

@@ -1,22 +1,17 @@
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
 import { FilmType } from '../../types';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchFilmAction } from '../../store/api-action';
+import { AppRoute } from '../../const';
 
 function PlayerPage(): JSX.Element {
-  const { id } = useParams();
-
-  const dispatch = useAppDispatch();
-  dispatch(fetchFilmAction(id as string));
-
-  const film = useAppSelector((state) => state.film) as FilmType; //unfinished
+  const film = useAppSelector((state) => state.film) as FilmType;
 
   return (
     <div className="player">
       <video src={film.videoLink} className="player__video" poster={film.backgroundImage} />
-      <button type="button" className="player__exit">
+      <Link to={`${AppRoute.Film}/${film.id}`} type="button" className="player__exit">
         Exit
-      </button>
+      </Link>
       <div className="player__controls">
         <div className="player__controls-row">
           <div className="player__time">

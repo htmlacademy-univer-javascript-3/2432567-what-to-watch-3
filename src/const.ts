@@ -21,7 +21,8 @@ enum TabsType {
 enum APIRoutes {
   Films = '/films',
   Promo = '/promo',
-  Film = '/films'
+  Film = '/films',
+  Reviews = '/comments',
 }
 
 export { AppRoute, AuthorizationStatus, TabsType, APIRoutes };
