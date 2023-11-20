@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FilmType, Review } from '../../types';
 import ReviewBlock from '../review/review';
-import { fetchReviewsAction } from '../../store/api-action';
+import { fetchReviews } from '../../store/api-action';
 
 function TabReviews(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ function TabReviews(): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews) as Review[];
 
   useEffect(() => {
-    dispatch(fetchReviewsAction(film.id));
+    dispatch(fetchReviews(film.id));
   }, [dispatch, film]);
 
   return (

@@ -8,8 +8,11 @@ import {
   loadFilmsAction,
   setActiveGenreAction,
   loadReviewsAction,
+  loginAction,
+  logoutAction,
 } from './action';
-import { FilmInListType, FilmPromoType, FilmType, Genre, Review } from '../types';
+import { FilmInListType, FilmPromoType, FilmType, Genre, Review, User } from '../types';
+import { dropToken, setToken } from '../services/token';
 
 type initialStateProps = {
   activeGenre: string;
@@ -21,6 +24,8 @@ type initialStateProps = {
   countShownFilms: number;
   statusLoading: boolean;
   reviews: Review[];
+  authorizationStatus: boolean;
+  user: User | null;
 }
 
 const initialState: initialStateProps = {
@@ -33,6 +38,8 @@ const initialState: initialStateProps = {
   countShownFilms: 8,
   statusLoading: false,
   reviews: [],
+  authorizationStatus: false,
+  user: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -66,6 +73,16 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviewsAction, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(loginAction, (state, action) => {
+      state.user = action.payload;
+      state.authorizationStatus = true;
+      setToken(action.payload.token);
+    })
+    .addCase(logoutAction, (state) => {
+      state.user = null;
+      state.authorizationStatus = false;
+      dropToken();
     });
 });
 

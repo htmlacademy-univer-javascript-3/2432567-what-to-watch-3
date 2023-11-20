@@ -6,7 +6,7 @@ import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
-import { fetchFilmAction } from '../../store/api-action';
+import { fetchFilm } from '../../store/api-action';
 import { FilmType } from '../../types';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
@@ -18,7 +18,7 @@ function MoviePage(): JSX.Element {
   const film = useAppSelector((state) => state.film) as FilmType;
 
   useEffect(() => {
-    dispatch(fetchFilmAction(id as string));
+    dispatch(fetchFilm(id as string));
   }, [dispatch, id]);
 
   if (!film) {

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import * as pages from './all-pages';
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
         <Route
           path={AppRoute.MyList}
           element={
-            <pages.PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <pages.PrivateRoute >
               <pages.MyListPage />
             </pages.PrivateRoute>
           }

@@ -47,9 +47,31 @@ type Review = {
   rating: number;
 }
 
+type DataAuthorization = {
+  name: string;
+  avatarUrl: string;
+  email: string;
+  token: string;
+}
+type User = DataAuthorization
+
+type DataUnauthorization = {
+  errorType: string;
+  message: string;
+}
+
+type FormData = {
+  email: string;
+  password: string;
+}
+
+type ResultAuthorization = DataAuthorization | DataUnauthorization
+
 type AppDispatch = typeof store.dispatch;
 type State = ReturnType<typeof store.getState>;
 
-export type { FilmType, FilmInListType, FilmPromoType, Review, AppDispatch, State, Genre };
+type Token = string;
+
+export type { FilmType, FilmInListType, FilmPromoType, Review, AppDispatch, State, Genre, ResultAuthorization, DataAuthorization, DataUnauthorization, User, FormData, Token };
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?

@@ -6,12 +6,6 @@ enum AppRoute {
   Player = '/player',
 }
 
-enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
-
 enum TabsType {
   Overview = 'Overview',
   Details = 'Details',
@@ -23,6 +17,8 @@ enum APIRoutes {
   Promo = '/promo',
   Film = '/films',
   Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout',
 }
 
-export { AppRoute, AuthorizationStatus, TabsType, APIRoutes };
+export { AppRoute, TabsType, APIRoutes };

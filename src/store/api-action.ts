@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
-import { AppDispatch, FilmInListType, FilmPromoType, FilmType, Review, State } from '../types';
-import { loadStatusAction, loadFilmAction, loadFilmPromoAction, loadFilmsAction, loadReviewsAction } from './action';
+import { AppDispatch, FilmInListType, FilmPromoType, FilmType, ResultAuthorization, Review, State, User, FormData, DataAuthorization } from '../types';
+import { loadStatusAction, loadFilmAction, loadFilmPromoAction, loadFilmsAction, loadReviewsAction, loginAction, logoutAction } from './action';
 import { APIRoutes } from '../const';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const fetchFilmsAction = createAsyncThunk<void, undefined, {
+const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -18,7 +18,7 @@ const fetchFilmsAction = createAsyncThunk<void, undefined, {
   },
 );
 
-const fetchFilmPromoAction = createAsyncThunk<void, undefined, {
+const fetchFilmPromo = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -30,7 +30,7 @@ const fetchFilmPromoAction = createAsyncThunk<void, undefined, {
   },
 );
 
-const fetchFilmAction = createAsyncThunk<void, string, {
+const fetchFilm = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -38,12 +38,11 @@ const fetchFilmAction = createAsyncThunk<void, string, {
   'data/fetchFilm',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<FilmType>(`${APIRoutes.Film}/${id}`);
-    // console.log(data)
     dispatch(loadFilmAction(data));
   },
 );
 
-const fetchReviewsAction = createAsyncThunk<void, string, {
+const fetchReviews = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -51,9 +50,48 @@ const fetchReviewsAction = createAsyncThunk<void, string, {
   'data/fetchReviews',
   async (id, { dispatch, extra: api }) => {
     const { data } = await api.get<Review[]>(`${APIRoutes.Reviews}/${id}`);
-    // console.log(data);
     dispatch(loadReviewsAction(data));
   },
 );
 
-export { fetchFilmsAction, fetchFilmPromoAction, fetchFilmAction, fetchReviewsAction };
+const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/authorizationStatus',
+  async (_arg, { dispatch, extra: api }) => {
+    const responce = await api.get<ResultAuthorization>(APIRoutes.Login);
+    if (responce.status === 200) {
+      dispatch(loginAction(responce.data as DataAuthorization));
+    }
+  },
+);
+
+const fetchLogin = createAsyncThunk<void, FormData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/login',
+  async (formData, { dispatch, extra: api }) => {
+    const { data } = await api.post<User>(APIRoutes.Login, formData);
+    dispatch(loginAction(data));
+  },
+);
+
+const fetchLogout = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/logout',
+  async (_arg, { dispatch, extra: api }) => {
+    const { status } = await api.delete(APIRoutes.Logout);
+    if (status === 204) {
+      dispatch(logoutAction());
+    }
+  },
+);
+
+export { fetchFilms, fetchFilmPromo, fetchFilm, fetchReviews, fetchAuthorizationStatus, fetchLogin, fetchLogout };
