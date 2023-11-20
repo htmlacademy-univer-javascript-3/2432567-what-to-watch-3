@@ -4,6 +4,7 @@ enum AppRoute {
   MyList = '/myList',
   Film = '/films',
   Player = '/player',
+  NotFoundPage = '*',
 }
 
 enum TabsType {
@@ -12,13 +13,14 @@ enum TabsType {
   Reviews = 'Reviews'
 }
 
-enum APIRoutes {
-  Films = '/films',
-  Promo = '/promo',
-  Film = '/films',
-  Reviews = '/comments',
-  Login = '/login',
-  Logout = '/logout',
-}
+const APIRoutes = {
+  Films: '/films',
+  Promo: '/promo',
+  Film: (id: string) => `/films/${id}`,
+  Reviews: (id: string) => `/comments/${id}`,
+  Similar: (id: string) => `/films/${id}/similar`,
+  Login: '/login',
+  Logout: '/logout',
+};
 
 export { AppRoute, TabsType, APIRoutes };

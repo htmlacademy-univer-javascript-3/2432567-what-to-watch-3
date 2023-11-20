@@ -72,6 +72,26 @@ type State = ReturnType<typeof store.getState>;
 
 type Token = string;
 
-export type { FilmType, FilmInListType, FilmPromoType, Review, AppDispatch, State, Genre, ResultAuthorization, DataAuthorization, DataUnauthorization, User, FormData, Token };
+type FormDataReview = {
+  rating: number;
+  reviewText: string;
+}
+
+export type {
+  FilmType,
+  FilmInListType,
+  FilmPromoType,
+  Review,
+  AppDispatch,
+  State,
+  Genre,
+  ResultAuthorization,
+  DataAuthorization,
+  DataUnauthorization,
+  User,
+  FormData,
+  Token,
+  FormDataReview,
+};
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?

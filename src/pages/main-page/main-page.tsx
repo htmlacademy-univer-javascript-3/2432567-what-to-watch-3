@@ -8,10 +8,12 @@ import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { defaultShownFilmsAction } from '../../store/action';
 import Loading from '../../components/loading/loading';
+import { FilmPromoType } from '../../types';
 
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const film = useAppSelector((state) => state.filmPromo) as FilmPromoType;
 
   useEffect(() => {
     dispatch(defaultShownFilmsAction());
@@ -28,8 +30,8 @@ function MainPage(): JSX.Element {
       <section className="film-card">
         <div className="film-card__bg">
           <img
-            src="img/bg-the-grand-budapest-hotel.jpg"
-            alt="The Grand Budapest Hotel"
+            src={film.backgroundImage}
+            alt={film.name}
           />
         </div>
         <h1 className="visually-hidden">WTW</h1>
