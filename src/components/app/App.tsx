@@ -1,16 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import * as pages from './all-pages';
-import Loading from '../loading/loading';
-import { useAppSelector } from '../../store/hooks';
 
 export default function App() {
-  const isFilmsLoad = useAppSelector((state) => (state.statusLoadingFilms));
-  if (isFilmsLoad) {
-    return (
-      <Loading />
-    );
-  }
   return (
     <BrowserRouter>
       <Routes>
@@ -19,7 +11,7 @@ export default function App() {
         <Route
           path={AppRoute.MyList}
           element={
-            <pages.PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <pages.PrivateRoute >
               <pages.MyListPage />
             </pages.PrivateRoute>
           }

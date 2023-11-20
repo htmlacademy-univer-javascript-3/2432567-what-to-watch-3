@@ -1,15 +1,13 @@
-import { Link, useParams } from 'react-router-dom';
-import { Film } from '../../types';
+import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
+import { FilmType } from '../../types';
 import { useAppSelector } from '../../store/hooks';
 
 function AddReviewPage(): JSX.Element {
-  const { id } = useParams();
-  const films = useAppSelector((state) => state.films) as Film[];
-  const film = films.find((item) => item.id === id) as Film;
+  const film = useAppSelector((state) => state.film) as FilmType;
 
   return (
     <section className="film-card film-card--full">

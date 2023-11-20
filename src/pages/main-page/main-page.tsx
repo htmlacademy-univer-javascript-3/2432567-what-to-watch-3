@@ -7,17 +7,22 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { defaultShownFilmsAction } from '../../store/action';
-import { Film } from '../../types';
+import Loading from '../../components/loading/loading';
 
 
 function MainPage(): JSX.Element {
-  const films = useAppSelector((state) => state.films) as Film[];
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(defaultShownFilmsAction());
   }, [dispatch]);
 
+  const isFilmsLoad = useAppSelector((state) => (state.statusLoading));
+  if (isFilmsLoad) {
+    return (
+      <Loading />
+    );
+  }
   return (
     <>
       <section className="film-card">
@@ -33,14 +38,14 @@ function MainPage(): JSX.Element {
           <UserBlock />
         </header>
         <div className="film-card__wrap">
-          <FilmPromo film={films[0]} />
+          <FilmPromo />
         </div>
       </section>
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
-          <FilmsList films={films.slice(1)} />
+          <FilmsList />
         </section>
         <Footer />
       </div>

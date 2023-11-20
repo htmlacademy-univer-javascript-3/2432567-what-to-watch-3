@@ -1,7 +1,12 @@
-import { Film } from '../../types';
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/hooks';
+import { FilmPromoType } from '../../types';
+import { AppRoute } from '../../const';
 
 
-function FilmPromo({ film }: { film: Film }): JSX.Element {
+function FilmPromo(): JSX.Element {
+  const film = useAppSelector((state) => state.filmPromo) as FilmPromoType;
+
   return (
     <div className="film-card__info">
       <div className="film-card__poster">
@@ -19,19 +24,19 @@ function FilmPromo({ film }: { film: Film }): JSX.Element {
           <span className="film-card__year">{film.released || ''}</span>
         </p>
         <div className="film-card__buttons">
-          <button className="btn btn--play film-card__button" type="button">
+          <Link to={`${AppRoute.Player}/${film.id}`} className="btn btn--play film-card__button" type="button">
             <svg viewBox="0 0 19 19" width={19} height={19}>
               <use xlinkHref="#play-s" />
             </svg>
             <span>Play</span>
-          </button>
-          <button className="btn btn--list film-card__button" type="button">
+          </Link>
+          <Link to={`${AppRoute.MyList}`} className="btn btn--list film-card__button" type="button">
             <svg viewBox="0 0 19 20" width={19} height={20}>
               <use xlinkHref="#add" />
             </svg>
             <span>My list</span>
             <span className="film-card__count">9</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

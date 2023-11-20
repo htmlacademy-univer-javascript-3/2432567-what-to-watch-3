@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import GenreLink from '../genre-link/genre-link';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Genre } from '../../types';

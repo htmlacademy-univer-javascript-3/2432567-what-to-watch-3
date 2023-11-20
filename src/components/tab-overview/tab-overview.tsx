@@ -1,6 +1,9 @@
-import { Film } from '../../types';
+import { useAppSelector } from '../../store/hooks';
+import { FilmType } from '../../types';
 
-function TabOverview({ film }: { film: Film }): JSX.Element {
+function TabOverview(): JSX.Element {
+  const film = useAppSelector((state) => state.film) as FilmType;
+
   return (
     <>
       <div className="film-rating">

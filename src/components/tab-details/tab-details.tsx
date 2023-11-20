@@ -1,6 +1,9 @@
-import { Film } from '../../types';
+import { useAppSelector } from '../../store/hooks';
+import { FilmType } from '../../types';
 
-function TabDetails({ film }: { film: Film }): JSX.Element {
+function TabDetails(): JSX.Element {
+  const film = useAppSelector((state) => state.film) as FilmType;
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">

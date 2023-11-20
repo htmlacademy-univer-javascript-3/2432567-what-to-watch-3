@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createAxios from '../api.ts';
+import createAxios from '../services/api.ts';
 import reducer from './reducer.ts';
 
 const axios = createAxios();

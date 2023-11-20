@@ -1,9 +1,9 @@
-import { Film } from '../../types';
+import { FilmInListType } from '../../types';
 
 type FilmCardProps = {
-  film: Film;
+  film: FilmInListType;
   isPlaying: boolean;
-  onMouseOver: (film: Film) => void;
+  onMouseOver: (film: FilmInListType) => void;
   onMouseOut: () => void;
 }
 

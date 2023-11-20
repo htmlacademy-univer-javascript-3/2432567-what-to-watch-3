@@ -3,13 +3,7 @@ enum AppRoute {
   SignIn = '/login',
   MyList = '/myList',
   Film = '/films',
-  Player = '/player/:id',
-}
-
-enum AuthorizationStatus {
-  Auth = 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
+  Player = '/player',
 }
 
 enum TabsType {
@@ -19,7 +13,12 @@ enum TabsType {
 }
 
 enum APIRoutes {
-  Films = '/films'
+  Films = '/films',
+  Promo = '/promo',
+  Film = '/films',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout',
 }
 
-export { AppRoute, AuthorizationStatus, TabsType, APIRoutes };
+export { AppRoute, TabsType, APIRoutes };

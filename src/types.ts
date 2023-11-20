@@ -1,6 +1,6 @@
 import store from './store';
 
-type FilmInList = {
+type FilmInListType = {
   id: string;
   name: string;
   previewImage: string;
@@ -8,7 +8,7 @@ type FilmInList = {
   genre: string;
 }
 
-type Film = {
+type FilmType = {
   id: string;
   name: string;
   posterImage: string;
@@ -26,7 +26,7 @@ type Film = {
   isFavorite: boolean;
 }
 
-type FilmPromo = {
+type FilmPromoType = {
   id: string;
   name: string;
   posterImage: string;
@@ -40,15 +40,38 @@ type FilmPromo = {
 type Genre = string;
 
 type Review = {
-  username: string;
-  text: string;
-  ratingScore: string;
+  id: string;
   date: string;
+  user: string;
+  comment: string;
+  rating: number;
 }
+
+type DataAuthorization = {
+  name: string;
+  avatarUrl: string;
+  email: string;
+  token: string;
+}
+type User = DataAuthorization
+
+type DataUnauthorization = {
+  errorType: string;
+  message: string;
+}
+
+type FormData = {
+  email: string;
+  password: string;
+}
+
+type ResultAuthorization = DataAuthorization | DataUnauthorization
 
 type AppDispatch = typeof store.dispatch;
 type State = ReturnType<typeof store.getState>;
 
-export type { Film, FilmInList, FilmPromo, Review, AppDispatch, State, Genre };
+type Token = string;
+
+export type { FilmType, FilmInListType, FilmPromoType, Review, AppDispatch, State, Genre, ResultAuthorization, DataAuthorization, DataUnauthorization, User, FormData, Token };
 
 // ВОПРОС: Как и где хранить общие типы для разный файлов? Как прокидывать типы в компоненты?

@@ -2,18 +2,28 @@ import { Link, useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
-import { Film } from '../../types';
 import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
-import { reviews } from '../../mocks/reviews';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
+import { fetchFilm } from '../../store/api-action';
+import { FilmType } from '../../types';
+import { useEffect } from 'react';
+import Loading from '../../components/loading/loading';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
-  const films = useAppSelector((state) => state.films) as Film[];
-  const film = films.find((item) => item.id === id) as Film;
+  const dispatch = useAppDispatch();
 
+  const film = useAppSelector((state) => state.film) as FilmType;
+
+  useEffect(() => {
+    dispatch(fetchFilm(id as string));
+  }, [dispatch, id]);
+
+  if (!film) {
+    return <Loading />;
+  }
   return (
     <>
       <section className="film-card film-card--full">
@@ -59,14 +69,14 @@ function MoviePage(): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width={218} height={327} />
             </div>
-            <Tabs film={film} reviews={reviews} />
+            <Tabs />
           </div>
         </div>
       </section>
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.filter((item) => item !== film && item.genre === film.genre)} />
+          <FilmsList />
         </section>
         <Footer />
       </div>
