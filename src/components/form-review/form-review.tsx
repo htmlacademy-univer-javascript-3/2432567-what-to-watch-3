@@ -1,10 +1,11 @@
-import { ChangeEvent, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Rating from '../rating/rating';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { FilmType, FormDataReview } from '../../types';
 import { sendReview } from '../../store/api-action';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { FormDataReview } from '../../schemas/forms';
+import { FilmType } from '../../schemas/films';
 
 
 function FormReview() {
@@ -23,7 +24,7 @@ function FormReview() {
     );
   };
 
-  const handlerFieldChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handlerFieldChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: name === 'rating' ? Number(value) : value });
     handlerValidate();

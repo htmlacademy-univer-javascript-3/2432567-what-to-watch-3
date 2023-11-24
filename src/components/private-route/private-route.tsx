@@ -3,7 +3,7 @@ import { AppRoute } from '../../const';
 import { useAppSelector } from '../../store/hooks';
 
 function PrivateRoute({ children }: { children: JSX.Element }): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus) as boolean;
+  const authorizationStatus = useAppSelector((state) => state.user) as boolean;
 
   return (
     authorizationStatus

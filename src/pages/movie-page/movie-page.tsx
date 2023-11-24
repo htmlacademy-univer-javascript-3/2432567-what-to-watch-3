@@ -7,10 +7,10 @@ import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
 import { fetchFilm } from '../../store/api-action';
-import { FilmType } from '../../types';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
 import { NotFoundPage } from '../../components/app/all-pages';
+import { FilmType } from '../../schemas/films';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
@@ -18,7 +18,7 @@ function MoviePage(): JSX.Element {
 
   const film = useAppSelector((state) => state.film) as FilmType;
   const error = useAppSelector((state) => state.hasError) as boolean;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus) as boolean;
+  const authorizationStatus = useAppSelector((state) => state.user) as boolean;
 
   useEffect(() => {
     dispatch(fetchFilm(id as string));

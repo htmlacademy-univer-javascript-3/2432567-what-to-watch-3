@@ -13,9 +13,13 @@ import {
   loadSimilarFilmsAction,
   setErrorAction,
   addReviewAction,
+  defaultCountShownFilmsAction,
 } from './action';
-import { FilmInListType, FilmPromoType, FilmType, Genre, Review, User } from '../types';
 import { dropToken, setToken } from '../services/token';
+import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
+import { Review } from '../schemas/review';
+import { User } from '../schemas/login';
+import { Genre } from '../types';
 
 type initialStateProps = {
   activeGenre: string;
@@ -28,7 +32,6 @@ type initialStateProps = {
   countShownFilms: number;
   statusLoading: boolean;
   reviews: Review[];
-  authorizationStatus: boolean;
   user: User | null;
   hasError: boolean;
 }
@@ -44,7 +47,6 @@ const initialState: initialStateProps = {
   countShownFilms: 8,
   statusLoading: false,
   reviews: [],
-  authorizationStatus: false,
   user: null,
   hasError: false,
 };
@@ -53,13 +55,15 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveGenreAction, (state, action) => {
       state.activeGenre = action.payload;
-      state.shownFilms = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === state.activeGenre);
+      state.shownFilms = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === action.payload);
     })
     .addCase(addShownFilmsAction, (state) => {
       state.countShownFilms += 8;
     })
     .addCase(defaultShownFilmsAction, (state) => {
       state.shownFilms = state.films;
+    })
+    .addCase(defaultCountShownFilmsAction, (state) => {
       state.countShownFilms = 8;
     })
     .addCase(loadFilmsAction, (state, action) => {
@@ -90,12 +94,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loginAction, (state, action) => {
       state.user = action.payload;
-      state.authorizationStatus = true;
       setToken(action.payload.token);
     })
     .addCase(logoutAction, (state) => {
       state.user = null;
-      state.authorizationStatus = false;
       dropToken();
     })
     .addCase(setErrorAction, (state, action) => {

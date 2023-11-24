@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
-import { FilmType } from '../../types';
 import { AppRoute } from '../../const';
+import { FilmType } from '../../schemas/films';
 
 function PlayerPage(): JSX.Element {
   const film = useAppSelector((state) => state.film) as FilmType;

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { FilmType, Review } from '../../types';
 import ReviewBlock from '../review/review';
 import { fetchReviews } from '../../store/api-action';
+import { FilmType } from '../../schemas/films';
+import { Review } from '../../schemas/review';
 
 function TabReviews(): JSX.Element {
   const dispatch = useAppDispatch();

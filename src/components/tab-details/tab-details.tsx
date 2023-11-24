@@ -1,5 +1,5 @@
+import { FilmType } from '../../schemas/films';
 import { useAppSelector } from '../../store/hooks';
-import { FilmType } from '../../types';
 import getRuntime from '../../utils/runtime-film';
 
 function TabDetails(): JSX.Element {
@@ -18,8 +18,7 @@ function TabDetails(): JSX.Element {
             {
               film.starring
                 .slice(0, film.starring.length - 1)
-                // eslint-disable-next-line react/no-array-index-key
-                .map((star, idx) => <span key={idx}>{star}, <br /></span>)
+                .map((star) => <span key={star}>{star}, <br /></span>)
             }
             <span>{film.starring.slice(film.starring.length - 1)} </span>
           </span>

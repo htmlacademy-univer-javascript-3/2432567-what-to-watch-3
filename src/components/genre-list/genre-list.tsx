@@ -1,7 +1,7 @@
 import GenreLink from '../genre-link/genre-link';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { Genre } from '../../types';
-import { defaultShownFilmsAction, setActiveGenreAction } from '../../store/action';
+import { defaultCountShownFilmsAction, setActiveGenreAction } from '../../store/action';
 
 function GenreList(): JSX.Element {
   const genres = useAppSelector((state) => state.genres) as Genre[];
@@ -10,7 +10,7 @@ function GenreList(): JSX.Element {
 
   const handlerOnClick = (genre: Genre) => {
     dispatch(setActiveGenreAction(genre));
-    dispatch(defaultShownFilmsAction());
+    dispatch(defaultCountShownFilmsAction());
   };
 
   return (

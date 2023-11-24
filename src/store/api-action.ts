@@ -1,8 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { AppDispatch, FilmInListType, FilmPromoType, FilmType, ResultAuthorization, Review, State, User, FormData, DataAuthorization, FormDataReview } from '../types';
+import { AppDispatch, State } from '../types';
 import { loadStatusAction, loadFilmAction, loadFilmPromoAction, loadFilmsAction, loadReviewsAction, loginAction, logoutAction, loadSimilarFilmsAction, setErrorAction, addReviewAction } from './action';
 import { APIRoutes } from '../const';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
+import { FormDataLogin, FormDataReview } from '../schemas/forms';
+import { Review } from '../schemas/review';
+import { DataAuthorization, ResultAuthorization, User } from '../schemas/login';
 
 const fetchFilms = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -98,7 +102,7 @@ const fetchAuthorizationStatus = createAsyncThunk<void, undefined, {
   },
 );
 
-const fetchLogin = createAsyncThunk<void, FormData, {
+const fetchLogin = createAsyncThunk<void, FormDataLogin, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

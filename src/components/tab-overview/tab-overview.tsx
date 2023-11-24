@@ -1,5 +1,5 @@
+import { FilmType } from '../../schemas/films';
 import { useAppSelector } from '../../store/hooks';
-import { FilmType } from '../../types';
 import getLevel from '../../utils/level_film';
 
 function TabOverview(): JSX.Element {
