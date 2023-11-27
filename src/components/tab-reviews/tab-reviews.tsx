@@ -4,11 +4,13 @@ import ReviewBlock from '../review/review';
 import { fetchReviews } from '../../store/api-action';
 import { FilmType } from '../../schemas/films';
 import { Review } from '../../schemas/review';
+import { getReviews } from '../../store/reviews/selectors';
+import { getFilm } from '../../store/films/selectors';
 
 function TabReviews(): JSX.Element {
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.film) as FilmType;
-  const reviews = useAppSelector((state) => state.reviews) as Review[];
+  const film = useAppSelector(getFilm) as FilmType;
+  const reviews = useAppSelector(getReviews) as Review[];
 
   useEffect(() => {
     dispatch(fetchReviews(film.id));

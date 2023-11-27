@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { FormDataReview } from '../../schemas/forms';
 import { FilmType } from '../../schemas/films';
+import { getFilm } from '../../store/films/selectors';
 
 
 function FormReview() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const film = useAppSelector((state) => state.film) as FilmType;
+  const film = useAppSelector(getFilm) as FilmType;
   const [formData, setFormData] = useState<FormDataReview>({
     rating: 0,
     reviewText: '',

@@ -6,21 +6,22 @@ import GenreList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { defaultCountShownFilmsAction, defaultShownFilmsAction } from '../../store/action';
 import Loading from '../../components/loading/loading';
 import { FilmPromoType } from '../../schemas/films';
+import { getFilmPromo, getStatusLoadingFilms } from '../../store/films/selectors';
+import { filmsActions } from '../../store/films/films';
 
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.filmPromo) as FilmPromoType;
+  const film = useAppSelector(getFilmPromo) as FilmPromoType;
 
   useEffect(() => {
-    dispatch(defaultShownFilmsAction());
-    dispatch(defaultCountShownFilmsAction());
+    dispatch(filmsActions.defaultShownFilmsAction());
+    dispatch(filmsActions.defaultCountShownFilmsAction());
   }, [dispatch]);
 
-  const isFilmsLoad = useAppSelector((state) => (state.statusLoading));
+  const isFilmsLoad = useAppSelector(getStatusLoadingFilms);
   if (isFilmsLoad) {
     return (
       <Loading />

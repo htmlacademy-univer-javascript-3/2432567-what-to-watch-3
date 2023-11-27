@@ -8,12 +8,13 @@ import Loading from '../../components/loading/loading';
 import { fetchFilm } from '../../store/api-action';
 import { useEffect } from 'react';
 import { FilmType } from '../../schemas/films';
+import { getFilm } from '../../store/films/selectors';
 
 function AddReviewPage(): JSX.Element {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.film) as FilmType;
+  const film = useAppSelector(getFilm) as FilmType;
 
   useEffect(() => {
     dispatch(fetchFilm(id as string));

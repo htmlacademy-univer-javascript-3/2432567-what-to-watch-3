@@ -1,9 +1,10 @@
 import { FilmType } from '../../schemas/films';
+import { getFilm } from '../../store/films/selectors';
 import { useAppSelector } from '../../store/hooks';
-import getRuntime from '../../utils/runtime-film';
+import getRuntime from '../../utils/duration';
 
 function TabDetails(): JSX.Element {
-  const film = useAppSelector((state) => state.film) as FilmType;
+  const film = useAppSelector(getFilm) as FilmType;
 
   return (
     <div className="film-card__text film-card__row">

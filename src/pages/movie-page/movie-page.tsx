@@ -11,14 +11,16 @@ import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
 import { NotFoundPage } from '../../components/app/all-pages';
 import { FilmType } from '../../schemas/films';
+import { getErrorFilm, getFilm } from '../../store/films/selectors';
+import { getUser } from '../../store/user/selectors';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
-  const film = useAppSelector((state) => state.film) as FilmType;
-  const error = useAppSelector((state) => state.hasError) as boolean;
-  const authorizationStatus = useAppSelector((state) => state.user) as boolean;
+  const film = useAppSelector(getFilm) as FilmType;
+  const error = useAppSelector(getErrorFilm) as boolean;
+  const authorizationStatus = useAppSelector(getUser) as boolean;
 
   useEffect(() => {
     dispatch(fetchFilm(id as string));

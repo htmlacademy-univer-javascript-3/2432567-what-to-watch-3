@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { FilmPromoType } from '../../schemas/films';
+import { getFilmPromo } from '../../store/films/selectors';
 
 
 function FilmPromo(): JSX.Element {
-  const film = useAppSelector((state) => state.filmPromo) as FilmPromoType;
+  const film = useAppSelector(getFilmPromo) as FilmPromoType;
 
   return (
     <div className="film-card__info">

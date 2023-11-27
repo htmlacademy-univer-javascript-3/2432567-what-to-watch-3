@@ -3,10 +3,11 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { fetchLogout } from '../../store/api-action';
 import { User } from '../../schemas/login';
+import { getUser } from '../../store/user/selectors';
 
 function AuthorizationUserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user) as User;
+  const user = useAppSelector(getUser) as User;
   const navigate = useNavigate();
 
   const handlerOnClick = () => {
