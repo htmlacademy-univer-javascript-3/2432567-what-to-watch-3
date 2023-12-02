@@ -1,9 +1,10 @@
 import { FilmType } from '../../schemas/films';
+import { getFilm } from '../../store/films/selectors';
 import { useAppSelector } from '../../store/hooks';
-import getLevel from '../../utils/level_film';
+import getLevel from '../../utils/level-film';
 
 function TabOverview(): JSX.Element {
-  const film = useAppSelector((state) => state.film) as FilmType;
+  const film = useAppSelector(getFilm) as FilmType;
 
   return (
     <>

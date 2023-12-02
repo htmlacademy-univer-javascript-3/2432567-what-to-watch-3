@@ -4,11 +4,13 @@ import ReviewBlock from '../review/review';
 import { fetchReviews } from '../../store/api-action';
 import { FilmType } from '../../schemas/films';
 import { Review } from '../../schemas/review';
+import { getReviews } from '../../store/reviews/selectors';
+import { getFilm } from '../../store/films/selectors';
 
 function TabReviews(): JSX.Element {
   const dispatch = useAppDispatch();
-  const film = useAppSelector((state) => state.film) as FilmType;
-  const reviews = useAppSelector((state) => state.reviews) as Review[];
+  const film = useAppSelector(getFilm) as FilmType;
+  const reviews = useAppSelector(getReviews) as Review[];
 
   useEffect(() => {
     dispatch(fetchReviews(film.id));
@@ -17,9 +19,14 @@ function TabReviews(): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {
-          reviews.map((review) => <ReviewBlock review={review} key={review.id} />)
-        }
+        {reviews.slice(0, reviews.length / 2).map((review) => (
+          <ReviewBlock key={review.id} review={review} />
+        ))}
+      </div>
+      <div className="film-card__reviews-col">
+        {reviews.slice(reviews.length / 2, reviews.length).map((review) => (
+          <ReviewBlock key={review.id} review={review} />
+        ))}
       </div>
     </div>
   );

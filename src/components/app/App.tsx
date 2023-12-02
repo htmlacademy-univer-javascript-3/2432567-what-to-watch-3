@@ -1,8 +1,19 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import * as pages from './all-pages';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchFavoriteFilms } from '../../store/api-action';
+import { useEffect } from 'react';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
-export default function App() {
+function App() {
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilms());
+  }, [authorizationStatus, dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -20,7 +31,14 @@ export default function App() {
           <Route index element={<pages.NotFoundPage />} />
           <Route path=':id'>
             <Route index element={<pages.MoviePage />} />
-            <Route path='review' element={<pages.AddReviewPage />} />
+            <Route
+              path='review'
+              element={
+                <pages.PrivateRoute >
+                  <pages.AddReviewPage />
+                </pages.PrivateRoute>
+              }
+            />
           </Route>
         </Route>
         <Route path={AppRoute.Player}>
@@ -32,3 +50,5 @@ export default function App() {
     </BrowserRouter >
   );
 }
+
+export default App;

@@ -1,11 +1,14 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { FilmPromoType } from '../../schemas/films';
-
+import { getFilmPromo } from '../../store/films/selectors';
+import MyListButton from '../my-list-btn/my-list-btn';
+import React from 'react';
 
 function FilmPromo(): JSX.Element {
-  const film = useAppSelector((state) => state.filmPromo) as FilmPromoType;
+  const film = useAppSelector(getFilmPromo) as FilmPromoType;
 
   return (
     <div className="film-card__info">
@@ -30,17 +33,11 @@ function FilmPromo(): JSX.Element {
             </svg>
             <span>Play</span>
           </Link>
-          <Link to={`${AppRoute.MyList}`} className="btn btn--list film-card__button" type="button">
-            <svg viewBox="0 0 19 20" width={19} height={20}>
-              <use xlinkHref="#add" />
-            </svg>
-            <span>My list</span>
-            <span className="film-card__count">9</span>
-          </Link>
+          <MyListButton film={film} />
         </div>
       </div>
     </div>
   );
 }
 
-export default FilmPromo;
+export default React.memo(FilmPromo);
