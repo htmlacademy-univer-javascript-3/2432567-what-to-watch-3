@@ -5,7 +5,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
 import { FormDataLogin, FormDataReview } from '../schemas/forms';
 import { Review } from '../schemas/review';
-import { DataAuthorization, ResultAuthorization, User } from '../schemas/login';
+import { ResultAuthorization, User } from '../schemas/login';
 
 const fetchFilms = createAsyncThunk<FilmInListType[], undefined, {
   dispatch: AppDispatch;
