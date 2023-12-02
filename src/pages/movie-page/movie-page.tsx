@@ -10,17 +10,17 @@ import { fetchFilm } from '../../store/api-action';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
 import { NotFoundPage } from '../../components/app/all-pages';
-import { FilmType } from '../../schemas/films';
-import { getErrorFilm, getFilm } from '../../store/films/selectors';
-import { getUser } from '../../store/user/selectors';
+import { FilmInListType, FilmType } from '../../schemas/films';
+import { getErrorFilm, getFilm, getSimilarFilms } from '../../store/films/selectors';
+import MyListButton from '../../components/my-list-btn/my-list-btn';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   const film = useAppSelector(getFilm) as FilmType;
+  const films = useAppSelector(getSimilarFilms) as FilmInListType[];
   const error = useAppSelector(getErrorFilm) as boolean;
-  const authorizationStatus = useAppSelector(getUser) as boolean;
 
   useEffect(() => {
     dispatch(fetchFilm(id as string));
@@ -58,22 +58,7 @@ function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                {
-                  authorizationStatus && (
-                    <>
-                      <Link to={AppRoute.MyList} className="btn btn--list film-card__button" type="button">
-                        <svg viewBox="0 0 19 20" width={19} height={20}>
-                          <use xlinkHref="#add" />
-                        </svg>
-                        <span>My list</span>
-                        <span className="film-card__count">9</span>
-                      </Link>
-                      <Link to={`${AppRoute.Film}/${film.id}/review`} className="btn film-card__button">
-                        Add review
-                      </Link>
-                    </>
-                  )
-                }
+                <MyListButton film={film} />
               </div>
             </div>
           </div>
@@ -90,7 +75,7 @@ function MoviePage(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList />
+          <FilmsList films={films} />
         </section>
         <Footer />
       </div>

@@ -19,6 +19,9 @@ const APIRoutes = {
   Film: (id: string) => `/films/${id}`,
   Reviews: (id: string) => `/comments/${id}`,
   Similar: (id: string) => `/films/${id}/similar`,
+  Favorite: '/favorite',
+  SetFavorite: (id: string) => `/favorite/${id}/1`,
+  DropFavorite: (id: string) => `/favorite/${id}/0`,
   Login: '/login',
   Logout: '/logout',
 };

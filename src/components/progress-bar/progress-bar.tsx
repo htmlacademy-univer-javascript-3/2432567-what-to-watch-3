@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+import React from 'react';
 import getRemainTime from '../../utils/remain-time';
 
 function ProgressBar({ currentTime, duration }: { currentTime: number; duration: number }): JSX.Element {
@@ -18,4 +20,4 @@ function ProgressBar({ currentTime, duration }: { currentTime: number; duration:
   );
 }
 
-export default ProgressBar;
+export default React.memo(ProgressBar);

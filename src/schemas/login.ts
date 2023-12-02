@@ -1,16 +1,15 @@
-type DataAuthorization = {
+type User = {
   name: string;
   avatarUrl: string;
   email: string;
   token: string;
 }
-type User = DataAuthorization
 
-type DataUnauthorization = {
+type ErrorUser = {
   errorType: string;
   message: string;
 }
 
-type ResultAuthorization = DataAuthorization | DataUnauthorization
+type ResultAuthorization = User | ErrorUser
 
-export type { DataAuthorization, User, DataUnauthorization, ResultAuthorization };
+export type { User, ErrorUser, ResultAuthorization };

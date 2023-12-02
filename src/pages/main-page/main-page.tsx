@@ -7,25 +7,29 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Loading from '../../components/loading/loading';
-import { FilmPromoType } from '../../schemas/films';
-import { getFilmPromo, getStatusLoadingFilms } from '../../store/films/selectors';
+import { FilmInListType, FilmPromoType } from '../../schemas/films';
+import { getActiveGenre, getFilmPromo, getFilms } from '../../store/films/selectors';
 import { filmsActions } from '../../store/films/films';
+import { Genre } from '../../types';
+import { fetchFilmPromo } from '../../store/api-action';
 
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const film = useAppSelector(getFilmPromo) as FilmPromoType;
+  const films = useAppSelector(getFilms) as FilmInListType[];
+  const genre = useAppSelector(getActiveGenre) as Genre;
 
   useEffect(() => {
-    dispatch(filmsActions.defaultShownFilmsAction());
-    dispatch(filmsActions.defaultCountShownFilmsAction());
+    dispatch(filmsActions.defaultGenreAction());
   }, [dispatch]);
 
-  const isFilmsLoad = useAppSelector(getStatusLoadingFilms);
-  if (isFilmsLoad) {
-    return (
-      <Loading />
-    );
+  useEffect(() => {
+    dispatch(fetchFilmPromo());
+  }, [dispatch]);
+
+  if (!film || !films) {
+    return <Loading />;
   }
   return (
     <>
@@ -46,7 +50,10 @@ function MainPage(): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
-          <FilmsList />
+          <FilmsList films={
+            genre === 'All genres' ? films : films.filter((item) => item.genre === genre)
+          }
+          />
         </section>
         <Footer />
       </div>

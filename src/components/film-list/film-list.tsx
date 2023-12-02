@@ -1,16 +1,16 @@
-import { useAppSelector } from '../../store/hooks';
 import FilmCard from '../film-card/film-card';
 import { useState } from 'react';
 import ShowMoreButton from '../show-more-btn/show-more-btn';
 import { FilmInListType } from '../../schemas/films';
-import { getCountShownFilms, getFilms } from '../../store/films/selectors';
 
-export default function FilmsList() {
+function FilmsList({ films }: { films: FilmInListType[] }) {
   const [acitveFilm, setActiveFilm] = useState('');
   let timer: NodeJS.Timeout;
+  const [countFilmsShown, setCountFilmsShown] = useState(8);
 
-  const films = useAppSelector(getFilms) as FilmInListType[];
-  const countFilmsShown = useAppSelector(getCountShownFilms) as number;
+  const handlerShowMore = () => {
+    setCountFilmsShown((prev) => prev + 8);
+  };
 
   const handlerMouseOver = (film: FilmInListType) => {
     timer = setTimeout(() => {
@@ -40,7 +40,9 @@ export default function FilmsList() {
             ))
         }
       </div>
-      {countFilmsShown < films.length && <ShowMoreButton />}
+      {countFilmsShown < films.length && <ShowMoreButton OnClick={handlerShowMore} />}
     </>
   );
 }
+
+export default FilmsList;

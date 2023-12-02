@@ -1,6 +1,5 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { AppRoute } from '../../const';
 import { FilmType } from '../../schemas/films';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import NotFoundPage from '../not-found-page/not-found-page';
@@ -8,9 +7,9 @@ import { fetchFilm } from '../../store/api-action';
 import { getErrorFilm, getFilm } from '../../store/films/selectors';
 import Loading from '../../components/loading/loading';
 import ProgressBar from '../../components/progress-bar/progress-bar';
-import PauseButton from '../../components/pause-btn/pause-btn';
-import PlayButton from '../../components/play-btn/play-btn';
+import PlayPauseButton from '../../components/play-pause-btn/play-pause-btn';
 import FullScreenButton from '../../components/full-screen-btn/full-screen-btn';
+import ExitButton from '../../components/exit-btn/exit-btn';
 
 function PlayerPage(): JSX.Element {
   const { id } = useParams();
@@ -29,7 +28,6 @@ function PlayerPage(): JSX.Element {
     return playerElement.currentTime;
   };
 
-
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
 
@@ -37,7 +35,7 @@ function PlayerPage(): JSX.Element {
     setCurrentTime(getCurrentTimeFilm());
   };
 
-  const handlePlayPauseClick = useCallback(() => {
+  const handlerPlayPauseClick = useCallback(() => {
     const playerElement = videoRef.current;
     if (!playerElement) {
       return;
@@ -50,7 +48,7 @@ function PlayerPage(): JSX.Element {
     }
   }, []);
 
-  const handleFullScreenClick = useCallback(() => {
+  const handlerFullScreenClick = useCallback(() => {
     const playerElement = videoRef.current;
     if (!playerElement) {
       return;
@@ -77,7 +75,7 @@ function PlayerPage(): JSX.Element {
   if (error) {
     return <NotFoundPage />;
   }
-  if (film === null) {
+  if (!film) {
     return <Loading />;
   }
   return (
@@ -89,17 +87,13 @@ function PlayerPage(): JSX.Element {
         ref={videoRef}
         onTimeUpdate={handlerTimeUpdate}
       />
-      <Link to={`${AppRoute.Film}/${film.id}`} type="button" className="player__exit">
-        Exit
-      </Link>
+      <ExitButton film={film} />
       <div className="player__controls">
         <ProgressBar currentTime={currentTime} duration={duration} />
         <div className="player__controls-row">
-          {
-            !videoRef.current?.paused ? <PauseButton onClick={handlePlayPauseClick} /> : <PlayButton onClick={handlePlayPauseClick} />
-          }
+          <PlayPauseButton onClick={handlerPlayPauseClick} isPlaying={!videoRef.current?.paused} />
           <div className="player__name">{film.name}</div>
-          <FullScreenButton onClick={handleFullScreenClick} />
+          <FullScreenButton onClick={handlerFullScreenClick} />
         </div>
       </div>
     </div>

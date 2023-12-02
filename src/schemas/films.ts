@@ -9,6 +9,8 @@ type FilmInListType = {
 type FilmType = {
   id: string;
   name: string;
+  previewImage: string;
+  previewVideoLink: string;
   posterImage: string;
   backgroundImage: string;
   backgroundColor: string;

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { fetchLogout } from '../../store/api-action';
@@ -18,22 +18,24 @@ function AuthorizationUserBlock(): JSX.Element {
   return (
     <ul className="user-block">
       <li className="user-block__item">
-        <div className="user-block__avatar">
-          <img
-            src={user.avatarUrl}
-            alt="User avatar"
-            width={63}
-            height={63}
-          />
-        </div>
+        <Link to={AppRoute.MyList}>
+          <div className="user-block__avatar">
+            <img
+              src={user.avatarUrl}
+              alt="User avatar"
+              width={63}
+              height={63}
+            />
+          </div>
+        </Link>
       </li>
       <li className="user-block__item">
-        <button
+        <a
           className="user-block__link"
           onClick={handlerOnClick}
         >
           Sign out
-        </button>
+        </a>
       </li>
     </ul>
   );

@@ -1,9 +1,9 @@
 import TabLink from '../tab-link/tab-link';
 import { TabsType } from '../../const';
 import { SyntheticEvent, useState } from 'react';
-import TabOverview from '../tab-overview/tab-overview';
-import TabDetails from '../tab-details/tab-details';
-import TabReviews from '../tab-reviews/tab-reviews';
+import TabOverview from './tab-overview';
+import TabDetails from './tab-details';
+import TabReviews from './tab-reviews';
 
 function Tabs(): JSX.Element {
   const [activeTab, setActiveTab] = useState<TabsType>(TabsType.Overview);

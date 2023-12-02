@@ -1,25 +1,35 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const.ts';
 import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action.ts';
-import { DataAuthorization, User } from '../../schemas/login.ts';
 import { dropToken, setToken } from '../../services/token.ts';
+import { User } from '../../schemas/login.ts';
 
 type initialStateProps = {
   user: User | null;
+  error: boolean;
 }
 
 const initialState: initialStateProps = {
   user: null,
+  error: false,
+};
+
+const pending = (state: initialStateProps) => {
+  state.error = false;
+};
+
+const rejected = (state: initialStateProps) => {
+  state.error = true;
+};
+
+const login = (state: initialStateProps, action: PayloadAction<User>) => {
+  state.user = action.payload;
+  setToken(action.payload.token);
 };
 
 const logout = (state: initialStateProps) => {
   state.user = null;
   dropToken();
-};
-
-const login = (state: initialStateProps, action: PayloadAction<DataAuthorization>) => {
-  state.user = action.payload;
-  setToken(action.payload.token);
 };
 
 const { reducer: userReducer, actions: userActions } = createSlice({
@@ -29,6 +39,8 @@ const { reducer: userReducer, actions: userActions } = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchAuthorizationStatus.fulfilled, login)
+      .addCase(fetchLogin.pending, pending)
+      .addCase(fetchLogin.rejected, rejected)
       .addCase(fetchLogin.fulfilled, login)
       .addCase(fetchLogout.fulfilled, logout);
   },

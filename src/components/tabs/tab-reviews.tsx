@@ -19,9 +19,14 @@ function TabReviews(): JSX.Element {
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {
-          reviews.map((review) => <ReviewBlock review={review} key={review.id} />)
-        }
+        {reviews.slice(0, reviews.length / 2).map((review) => (
+          <ReviewBlock key={review.id} review={review} />
+        ))}
+      </div>
+      <div className="film-card__reviews-col">
+        {reviews.slice(reviews.length / 2, reviews.length).map((review) => (
+          <ReviewBlock key={review.id} review={review} />
+        ))}
       </div>
     </div>
   );
