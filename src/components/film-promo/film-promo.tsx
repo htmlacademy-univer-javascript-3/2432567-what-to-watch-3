@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
-import { FilmPromoType } from '../../types';
 import { AppRoute } from '../../const';
+import { FilmPromoType } from '../../schemas/films';
 
 
 function FilmPromo(): JSX.Element {

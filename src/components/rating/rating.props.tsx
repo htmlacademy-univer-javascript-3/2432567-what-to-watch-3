@@ -1,8 +1,7 @@
-import { Evt } from '../form-review/form-review.props';
+import { ChangeEvent } from 'react';
 
 type RatingProps = {
-  rating: string;
-  setRating: (evt: Evt) => void;
+  setRating: (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 export type { RatingProps };

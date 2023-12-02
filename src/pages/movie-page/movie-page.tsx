@@ -7,21 +7,27 @@ import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
 import { fetchFilm } from '../../store/api-action';
-import { FilmType } from '../../types';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
+import { NotFoundPage } from '../../components/app/all-pages';
+import { FilmType } from '../../schemas/films';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
 
   const film = useAppSelector((state) => state.film) as FilmType;
+  const error = useAppSelector((state) => state.hasError) as boolean;
+  const authorizationStatus = useAppSelector((state) => state.user) as boolean;
 
   useEffect(() => {
     dispatch(fetchFilm(id as string));
   }, [dispatch, id]);
 
-  if (!film) {
+  if (error) {
+    return <NotFoundPage />;
+  }
+  if (film === null) {
     return <Loading />;
   }
   return (
@@ -50,16 +56,22 @@ function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <Link to={AppRoute.MyList} className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width={19} height={20}>
-                    <use xlinkHref="#add" />
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </Link>
-                <Link to={`${AppRoute.Film}/${film.id}/review`} className="btn film-card__button">
-                  Add review
-                </Link>
+                {
+                  authorizationStatus && (
+                    <>
+                      <Link to={AppRoute.MyList} className="btn btn--list film-card__button" type="button">
+                        <svg viewBox="0 0 19 20" width={19} height={20}>
+                          <use xlinkHref="#add" />
+                        </svg>
+                        <span>My list</span>
+                        <span className="film-card__count">9</span>
+                      </Link>
+                      <Link to={`${AppRoute.Film}/${film.id}/review`} className="btn film-card__button">
+                        Add review
+                      </Link>
+                    </>
+                  )
+                }
               </div>
             </div>
           </div>

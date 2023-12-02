@@ -1,4 +1,4 @@
-import { Review } from '../../types';
+import { Review } from '../../schemas/review';
 
 function ReviewBlock({ review }: { review: Review }): JSX.Element {
   return (
@@ -9,7 +9,7 @@ function ReviewBlock({ review }: { review: Review }): JSX.Element {
         </p>
         <footer className="review__details">
           <cite className="review__author">{review.user}</cite>
-          <time className="review__date" /*dateTime="2016-12-24"*/>
+          <time className="review__date">
             {review.date}
           </time>
         </footer>

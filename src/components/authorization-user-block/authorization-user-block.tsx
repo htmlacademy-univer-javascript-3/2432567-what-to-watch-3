@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { User } from '../../types';
 import { AppRoute } from '../../const';
 import { fetchLogout } from '../../store/api-action';
+import { User } from '../../schemas/login';
 
 function AuthorizationUserBlock(): JSX.Element {
   const dispatch = useAppDispatch();

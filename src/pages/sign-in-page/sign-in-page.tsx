@@ -1,17 +1,17 @@
-import { ChangeEvent, FormEventHandler, useState } from 'react';
+import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../store/hooks';
 import { AppRoute } from '../../const';
-import { FormData } from '../../types';
+import { FormDataLogin } from '../../schemas/forms';
 import { fetchLogin } from '../../store/api-action';
 
 function SignInPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormDataLogin>({
     email: '',
     password: ''
   });
@@ -26,13 +26,13 @@ function SignInPage(): JSX.Element {
     );
   };
 
-  const handlerFieldChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handlerFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
     handlerValidate();
   };
 
-  const handlerSubmit: FormEventHandler<HTMLButtonElement> = (evt) => { // typing?
+  const handlerSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
     if (isValid) {
       dispatch(fetchLogin(formData));

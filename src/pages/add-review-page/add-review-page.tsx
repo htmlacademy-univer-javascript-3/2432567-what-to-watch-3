@@ -1,22 +1,32 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
-import { FilmType } from '../../types';
-import { useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import Loading from '../../components/loading/loading';
+import { fetchFilm } from '../../store/api-action';
+import { useEffect } from 'react';
+import { FilmType } from '../../schemas/films';
 
 function AddReviewPage(): JSX.Element {
+  const { id } = useParams();
+
+  const dispatch = useAppDispatch();
   const film = useAppSelector((state) => state.film) as FilmType;
 
+  useEffect(() => {
+    dispatch(fetchFilm(id as string));
+  }, [dispatch, id]);
+
+  if (film === null) {
+    return <Loading />;
+  }
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img
-            src={film.backgroundImage}
-            alt={film.name}
-          />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">

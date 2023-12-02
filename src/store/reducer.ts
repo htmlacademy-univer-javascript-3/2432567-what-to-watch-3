@@ -10,22 +10,30 @@ import {
   loadReviewsAction,
   loginAction,
   logoutAction,
+  loadSimilarFilmsAction,
+  setErrorAction,
+  addReviewAction,
+  defaultCountShownFilmsAction,
 } from './action';
-import { FilmInListType, FilmPromoType, FilmType, Genre, Review, User } from '../types';
 import { dropToken, setToken } from '../services/token';
+import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
+import { Review } from '../schemas/review';
+import { User } from '../schemas/login';
+import { Genre } from '../types';
 
 type initialStateProps = {
   activeGenre: string;
   genres: string[];
-  film: FilmType | null;
+  film: FilmType | null | undefined;
   shownFilms: FilmInListType[];
   films: FilmInListType[];
   filmPromo: FilmPromoType | null;
+  similarFilms: FilmInListType[];
   countShownFilms: number;
   statusLoading: boolean;
   reviews: Review[];
-  authorizationStatus: boolean;
   user: User | null;
+  hasError: boolean;
 }
 
 const initialState: initialStateProps = {
@@ -35,23 +43,27 @@ const initialState: initialStateProps = {
   shownFilms: [],
   films: [],
   filmPromo: null,
+  similarFilms: [],
   countShownFilms: 8,
   statusLoading: false,
   reviews: [],
-  authorizationStatus: false,
   user: null,
+  hasError: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setActiveGenreAction, (state, action) => {
       state.activeGenre = action.payload;
-      state.shownFilms = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === state.activeGenre);
+      state.shownFilms = action.payload === 'All genres' ? state.films : state.films.filter((film) => film.genre === action.payload);
     })
     .addCase(addShownFilmsAction, (state) => {
       state.countShownFilms += 8;
     })
     .addCase(defaultShownFilmsAction, (state) => {
+      state.shownFilms = state.films;
+    })
+    .addCase(defaultCountShownFilmsAction, (state) => {
       state.countShownFilms = 8;
     })
     .addCase(loadFilmsAction, (state, action) => {
@@ -68,21 +80,28 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadFilmAction, (state, action) => {
       state.film = action.payload;
     })
+    .addCase(loadSimilarFilmsAction, (state, action) => {
+      state.shownFilms = action.payload;
+    })
     .addCase(loadStatusAction, (state, action) => {
       state.statusLoading = action.payload;
     })
     .addCase(loadReviewsAction, (state, action) => {
       state.reviews = action.payload;
     })
+    .addCase(addReviewAction, (state, action) => {
+      state.reviews.push(action.payload);
+    })
     .addCase(loginAction, (state, action) => {
       state.user = action.payload;
-      state.authorizationStatus = true;
       setToken(action.payload.token);
     })
     .addCase(logoutAction, (state) => {
       state.user = null;
-      state.authorizationStatus = false;
       dropToken();
+    })
+    .addCase(setErrorAction, (state, action) => {
+      state.hasError = action.payload;
     });
 });
 

@@ -1,4 +1,4 @@
-import { FilmInListType } from '../../types';
+import { FilmInListType } from '../../schemas/films';
 
 type FilmCardProps = {
   film: FilmInListType;

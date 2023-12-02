@@ -3,12 +3,8 @@ import AuthorizationUserBlock from '../authorization-user-block/authorization-us
 import UnauthorizationUserBlock from '../unauthorization-user-block/unauthorization-user-block';
 
 function UserBlock() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
-  if (authorizationStatus) {
-    return <AuthorizationUserBlock />;
-  }
-  return <UnauthorizationUserBlock />;
+  const authorizationStatus = useAppSelector((state) => state.user) as boolean;
+  return authorizationStatus ? <AuthorizationUserBlock /> : <UnauthorizationUserBlock />;
 }
 
 export default UserBlock;

@@ -1,5 +1,6 @@
+import { FilmType } from '../../schemas/films';
 import { useAppSelector } from '../../store/hooks';
-import { FilmType } from '../../types';
+import getRuntime from '../../utils/runtime-film';
 
 function TabDetails(): JSX.Element {
   const film = useAppSelector((state) => state.film) as FilmType;
@@ -15,16 +16,18 @@ function TabDetails(): JSX.Element {
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
             {
-              // eslint-disable-next-line react/no-array-index-key
-              film.starring?.map((star, idx) => <span key={idx}>{star}, <br /></span>)
+              film.starring
+                .slice(0, film.starring.length - 1)
+                .map((star) => <span key={star}>{star}, <br /></span>)
             }
+            <span>{film.starring.slice(film.starring.length - 1)} </span>
           </span>
         </p>
       </div>
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">{getRuntime(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
