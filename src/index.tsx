@@ -5,9 +5,7 @@ import store from './store';
 import { fetchAuthorizationStatus, fetchFilms } from './store/api-action';
 import App from './components/app/App';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 store.dispatch(fetchFilms());
 store.dispatch(fetchAuthorizationStatus());
