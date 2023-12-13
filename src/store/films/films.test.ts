@@ -130,8 +130,8 @@ describe('films slice', () => {
     describe('dropFavoriteFilms', () => {
       it('dropFavoriteFilms.fulfilled', () => {
         const films = makeFakeFilms();
-        const film = films[0];
-        const expectedState = { ...initialState, favoriteFilms: [films[1]] };
+        const film = films.pop();
+        const expectedState = { ...initialState, favoriteFilms: films };
 
         const result = filmsReducer({
           ...initialState,
