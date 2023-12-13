@@ -1,11 +1,11 @@
 import { AxiosInstance } from 'axios';
-import { AppDispatch, State } from '../types';
-import { APIRoutes } from '../const';
+import { AppDispatch, State } from '../../types';
+import { APIRoutes } from '../../const';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
-import { FormDataLogin, FormDataReview } from '../schemas/forms';
-import { Review } from '../schemas/review';
-import { ResultAuthorization, User } from '../schemas/login';
+import { FilmInListType, FilmPromoType, FilmType } from '../../schemas/films';
+import { FormDataLogin, FormDataReview } from '../../schemas/forms';
+import { Review } from '../../schemas/review';
+import { ResultAuthorization, User } from '../../schemas/login';
 
 const fetchFilms = createAsyncThunk<FilmInListType[], undefined, {
   dispatch: AppDispatch;

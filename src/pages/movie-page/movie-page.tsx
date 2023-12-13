@@ -6,7 +6,7 @@ import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs';
-import { fetchFilm } from '../../store/api-action';
+import { fetchFilm } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';
 import { NotFoundPage } from '../../components/app/all-pages';
@@ -68,7 +68,7 @@ function MoviePage(): JSX.Element {
             <div className="film-card__poster film-card__poster--big">
               <img src={film.posterImage} alt={film.name} width={218} height={327} />
             </div>
-            <Tabs />
+            <Tabs film={film} />
           </div>
         </div>
       </section>

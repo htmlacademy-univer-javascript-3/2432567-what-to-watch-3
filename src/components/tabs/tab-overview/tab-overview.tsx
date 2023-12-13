@@ -1,11 +1,7 @@
-import { FilmType } from '../../schemas/films';
-import { getFilm } from '../../store/films/selectors';
-import { useAppSelector } from '../../store/hooks';
-import getLevel from '../../utils/level-film';
+import { FilmType } from '../../../schemas/films';
+import getLevel from '../../../utils/level-film';
 
-function TabOverview(): JSX.Element {
-  const film = useAppSelector(getFilm) as FilmType;
-
+function TabOverview({ film }: { film: FilmType }): JSX.Element {
   return (
     <>
       <div className="film-rating">

@@ -5,7 +5,7 @@ import UserBlock from '../../components/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Loading from '../../components/loading/loading';
-import { fetchFilm } from '../../store/api-action';
+import { fetchFilm } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import { FilmType } from '../../schemas/films';
 import { getFilm } from '../../store/films/selectors';

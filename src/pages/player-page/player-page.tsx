@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FilmType } from '../../schemas/films';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import NotFoundPage from '../not-found-page/not-found-page';
-import { fetchFilm } from '../../store/api-action';
+import { fetchFilm } from '../../store/api-action/api-action';
 import { getErrorFilm, getFilm } from '../../store/films/selectors';
 import Loading from '../../components/loading/loading';
 import ProgressBar from '../../components/progress-bar/progress-bar';

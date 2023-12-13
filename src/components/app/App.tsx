@@ -1,10 +1,11 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import * as pages from './all-pages';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { fetchFavoriteFilms } from '../../store/api-action';
+import { fetchFavoriteFilms } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ function App() {
   }, [authorizationStatus, dispatch]);
 
   return (
-    <BrowserRouter>
+    <HelmetProvider>
       <Routes>
         <Route path={AppRoute.Main} element={<pages.MainPage />} />
         <Route path={AppRoute.SignIn} element={<pages.SignInPage />} />
@@ -47,7 +48,7 @@ function App() {
         </Route>
         <Route path="*" element={<pages.NotFoundPage />} />
       </Routes>
-    </BrowserRouter >
+    </HelmetProvider>
   );
 }
 

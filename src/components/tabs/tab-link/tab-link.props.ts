@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react';
-import { TabsType } from '../../const';
+import { TabsType } from '../../../const';
 
 type TabLinkProps = {
   tab: TabsType;

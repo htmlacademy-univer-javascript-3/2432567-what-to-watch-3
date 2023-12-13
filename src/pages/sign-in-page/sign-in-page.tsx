@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { FormDataLogin } from '../../schemas/forms';
-import { fetchLogin } from '../../store/api-action';
+import { fetchLogin } from '../../store/api-action/api-action';
 import { getErrorUser } from '../../store/user/selectors';
 
 function SignInPage(): JSX.Element {
@@ -47,7 +47,7 @@ function SignInPage(): JSX.Element {
     evt.preventDefault();
     if (validate()) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const err = (await dispatch(fetchLogin(formData)) as unknown as { error: string }).error; // ???
+      const err = (await dispatch(fetchLogin(formData)) as unknown as { error: string }).error; // доделать с помощью middleware
       if (!err) {
         navigate(AppRoute.Main);
       }

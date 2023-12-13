@@ -1,11 +1,7 @@
-import { FilmType } from '../../schemas/films';
-import { getFilm } from '../../store/films/selectors';
-import { useAppSelector } from '../../store/hooks';
-import getRuntime from '../../utils/duration';
+import { FilmType } from '../../../schemas/films';
+import { durationFormate } from '../../../utils/date-reformat';
 
-function TabDetails(): JSX.Element {
-  const film = useAppSelector(getFilm) as FilmType;
-
+function TabDetails({ film }: { film: FilmType }): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -28,7 +24,7 @@ function TabDetails(): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{getRuntime(film.runTime)}</span>
+          <span className="film-card__details-value">{durationFormate(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

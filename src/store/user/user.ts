@@ -1,13 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const.ts';
-import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action.ts';
+import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action/api-action.ts';
 import { dropToken, setToken } from '../../services/token.ts';
 import { User } from '../../schemas/login.ts';
-
-type initialStateProps = {
-  user: User | null;
-  error: boolean;
-}
+import { initialStateProps } from './user.props.ts';
 
 const initialState: initialStateProps = {
   user: null,
