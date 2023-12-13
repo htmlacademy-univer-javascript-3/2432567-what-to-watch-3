@@ -3,6 +3,7 @@ import { makeFakeFilm, makeFakeFilmInList, makeFakeFilms, makeFakePromoFilm } fr
 import { addFavoriteFilm, dropFavoriteFilm, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms } from '../api-action/api-action';
 import { filmsActions, filmsReducer } from './films';
 import { initialStateProps } from './films.props';
+import { FilmInListType } from '../../schemas/films';
 
 describe('films slice', () => {
   const initialState: initialStateProps = {
@@ -130,7 +131,7 @@ describe('films slice', () => {
     describe('dropFavoriteFilms', () => {
       it('dropFavoriteFilms.fulfilled', () => {
         const films = makeFakeFilms();
-        const film = films.pop();
+        const film = films.pop() as FilmInListType;
         const expectedState = { ...initialState, favoriteFilms: films };
 
         const result = filmsReducer({
