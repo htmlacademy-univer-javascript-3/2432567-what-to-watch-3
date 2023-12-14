@@ -15,6 +15,7 @@ function Rating({ setRating }: RatingProps) {
                 name="rating"
                 value={number}
                 onChange={setRating}
+                data-testid='star'
                 // checked={number <= rating} unfinished
               />
               <label

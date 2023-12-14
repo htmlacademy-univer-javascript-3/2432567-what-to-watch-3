@@ -1,13 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const.ts';
-import { fetchReviews, sendReview } from '../api-action.ts';
-import { Review } from '../../schemas/review.ts';
-
-type initialStateProps = {
-  reviews: Review[];
-  statusLoading: boolean;
-  hasError: boolean;
-}
+import { fetchReviews, sendReview } from '../api-action/api-action.ts';
+import { initialStateProps } from './reviews.props.ts';
 
 const initialState: initialStateProps = {
   reviews: [],

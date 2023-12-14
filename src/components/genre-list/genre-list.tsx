@@ -11,7 +11,6 @@ function GenreList(): JSX.Element {
 
   const handlerOnClick = (genre: Genre) => {
     dispatch(filmsActions.setActiveGenreAction(genre));
-    dispatch(filmsActions.defaultCountShownFilmsAction());
   };
 
   return (

@@ -1,20 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const.ts';
-import { FilmInListType, FilmPromoType, FilmType } from '../../schemas/films.ts';
+import { FilmPromoType, FilmType } from '../../schemas/films.ts';
 import { Genre } from '../../types.ts';
-import { addFavoriteFilm, dropFavoriteFilm, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms } from '../api-action.ts';
-
-type initialStateProps = {
-  genres: string[];
-  activeGenre: Genre;
-  film: FilmType | null | undefined;
-  films: FilmInListType[];
-  filmPromo: FilmPromoType | null;
-  similarFilms: FilmInListType[];
-  favoriteFilms: FilmInListType[];
-  countShownFilms: number;
-  hasError: boolean;
-}
+import { addFavoriteFilm, dropFavoriteFilm, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms } from '../api-action/api-action.ts';
+import { initialStateProps } from './films.props.ts';
+import findGenres from '../../utils/get-genres.ts';
 
 const initialState: initialStateProps = {
   genres: [],
@@ -24,7 +14,6 @@ const initialState: initialStateProps = {
   filmPromo: null,
   similarFilms: [],
   favoriteFilms: [],
-  countShownFilms: 8,
   hasError: false,
 };
 
@@ -40,12 +29,8 @@ const { reducer: filmsReducer, actions: filmsActions } = createSlice({
   name: NameSpace.Film,
   initialState,
   reducers: {
-
     defaultGenreAction: (state) => {
       state.activeGenre = 'All genres';
-    },
-    defaultCountShownFilmsAction: (state) => {
-      state.countShownFilms = 8;
     },
     setActiveGenreAction: (state, action: PayloadAction<Genre>) => {
       state.activeGenre = action.payload;
@@ -62,10 +47,7 @@ const { reducer: filmsReducer, actions: filmsActions } = createSlice({
       .addCase(fetchFilms.rejected, rejected)
       .addCase(fetchFilms.fulfilled, (state, action) => {
         state.films = action.payload;
-
-        const genres = new Set<Genre>(['All genres']);
-        action.payload.forEach((film: FilmInListType) => genres.add(film.genre));
-        state.genres = Array.from(genres).slice(0, 9);
+        state.genres = findGenres(action.payload);
       })
       .addCase(fetchFilmPromo.pending, pending)
       .addCase(fetchFilmPromo.rejected, rejected)
@@ -79,7 +61,6 @@ const { reducer: filmsReducer, actions: filmsActions } = createSlice({
         state.film = film;
         state.similarFilms = similarFilms;
       })
-      .addCase(fetchFavoriteFilms.pending, pending)
       .addCase(fetchFavoriteFilms.rejected, (state) => {
         state.favoriteFilms = [];
       })

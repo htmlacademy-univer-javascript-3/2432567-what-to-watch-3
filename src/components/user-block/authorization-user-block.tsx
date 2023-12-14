@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
-import { fetchLogout } from '../../store/api-action';
+import { fetchLogout } from '../../store/api-action/api-action';
 import { User } from '../../schemas/login';
 import { getUser } from '../../store/user/selectors';
 

@@ -9,8 +9,9 @@ function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): 
       className="small-film-card catalog__films-card"
       onMouseOver={() => onMouseOver(film)}
       onMouseOut={() => onMouseOut()}
+      data-testid='movie'
     >
-      <div className="small-film-card__image">
+      <div className="small-film-card__image" data-testid="small-film-card-image">
         <PreviewVideo
           linkVideo={film.previewVideoLink}
           linkPoster={film.previewImage}

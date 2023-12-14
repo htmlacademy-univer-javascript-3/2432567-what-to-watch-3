@@ -9,6 +9,7 @@ function TabLink({ tab, activeTab, onClick }: TabLinkProps): JSX.Element {
       }
       onClick={onClick}
       id={tab}
+      data-testid={tab}
     >
       <a className="film-nav__link"> {tab} </a>
     </li>

@@ -11,7 +11,7 @@ import { FilmInListType, FilmPromoType } from '../../schemas/films';
 import { getActiveGenre, getFilmPromo, getFilms } from '../../store/films/selectors';
 import { filmsActions } from '../../store/films/films';
 import { Genre } from '../../types';
-import { fetchFilmPromo } from '../../store/api-action';
+import { fetchFilmPromo } from '../../store/api-action/api-action';
 
 
 function MainPage(): JSX.Element {
@@ -43,7 +43,7 @@ function MainPage(): JSX.Element {
           <UserBlock />
         </header>
         <div className="film-card__wrap">
-          <FilmPromo />
+          <FilmPromo film={film} />
         </div>
       </section>
       <div className="page-content">

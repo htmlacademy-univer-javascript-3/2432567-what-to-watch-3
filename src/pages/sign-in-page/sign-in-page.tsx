@@ -1,16 +1,13 @@
 import { ChangeEventHandler, FormEvent, useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { AppRoute } from '../../const';
 import { FormDataLogin } from '../../schemas/forms';
-import { fetchLogin } from '../../store/api-action';
+import { fetchLogin } from '../../store/api-action/api-action';
 import { getErrorUser } from '../../store/user/selectors';
 
 function SignInPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const message = useAppSelector(getErrorUser) as boolean;
   const [errors, setErrors] = useState<string[]>([]);
@@ -38,19 +35,15 @@ function SignInPage(): JSX.Element {
     return !hasError;
   };
 
-  const handlerFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
+  const handleFieldChange: ChangeEventHandler<HTMLInputElement> = (evt) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  async function handlerSubmit(evt: FormEvent<HTMLButtonElement>) {
+  function handleSubmit(evt: FormEvent<HTMLButtonElement>) {
     evt.preventDefault();
     if (validate()) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const err = (await dispatch(fetchLogin(formData)) as unknown as { error: string }).error; // ???
-      if (!err) {
-        navigate(AppRoute.Main);
-      }
+      dispatch(fetchLogin(formData));
     }
   }
 
@@ -73,11 +66,11 @@ function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 className="sign-in__input"
-                type="email"
+                // type="email"
                 placeholder="Email address"
                 name="email"
                 id="user-email"
-                onChange={handlerFieldChange}
+                onChange={handleFieldChange}
                 value={formData.email}
               />
               <label
@@ -94,7 +87,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="password"
                 id="user-password"
-                onChange={handlerFieldChange}
+                onChange={handleFieldChange}
                 value={formData.password}
               />
               <label
@@ -110,7 +103,7 @@ function SignInPage(): JSX.Element {
               className="sign-in__btn"
               type="submit"
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onSubmit={handlerSubmit}
+              onClick={handleSubmit}
             >
               Sign in
             </button>

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Rating from '../rating/rating';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { sendReview } from '../../store/api-action';
+import { sendReview } from '../../store/api-action/api-action';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { FormDataReview } from '../../schemas/forms';

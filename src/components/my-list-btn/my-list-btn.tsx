@@ -4,7 +4,7 @@ import { getAuthorizationStatus } from '../../store/user/selectors';
 import { AppRoute } from '../../const';
 import { getCountFavoriteFilms } from '../../store/films/selectors';
 import { FilmPromoType, FilmType } from '../../schemas/films';
-import { addFavoriteFilm, dropFavoriteFilm } from '../../store/api-action';
+import { addFavoriteFilm, dropFavoriteFilm } from '../../store/api-action/api-action';
 import { useEffect, useState } from 'react';
 
 function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element {
@@ -42,9 +42,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
         <use xlinkHref={!isFavorite || !authorizationStatus ? '#add' : '#in-list'} />
       </svg>
       <span>My list</span>
-      {
-        countFavoriteFilms > 0 && <span className="film-card__count">{countFavoriteFilms}</span>
-      }
+      {countFavoriteFilms > 0 && <span className="film-card__count">{countFavoriteFilms}</span>}
     </button>
   );
 }

@@ -2,7 +2,7 @@ import { Review } from '../../schemas/review';
 
 function ReviewBlock({ review }: { review: Review }): JSX.Element {
   return (
-    <div className="review">
+    <div className="review" data-testid="review">
       <blockquote className="review__quote">
         <p className="review__text">
           {review.comment}

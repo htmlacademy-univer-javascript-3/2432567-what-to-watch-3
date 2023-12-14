@@ -27,11 +27,15 @@ const APIRoutes = {
 };
 
 enum NameSpace {
-  Genre = 'GENRE',
-  MyList = 'MY_LIST',
   Film = 'FILM',
   Review = 'REVIEW',
   User = 'USER',
 }
 
-export { AppRoute, TabsType, APIRoutes, NameSpace };
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export { AppRoute, TabsType, APIRoutes, NameSpace, AuthorizationStatus };

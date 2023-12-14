@@ -1,15 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../store/hooks';
 import { AppRoute } from '../../const';
 import { FilmPromoType } from '../../schemas/films';
-import { getFilmPromo } from '../../store/films/selectors';
 import MyListButton from '../my-list-btn/my-list-btn';
 import React from 'react';
 
-function FilmPromo(): JSX.Element {
-  const film = useAppSelector(getFilmPromo) as FilmPromoType;
-
+function FilmPromo({ film }: { film: FilmPromoType }): JSX.Element {
   return (
     <div className="film-card__info">
       <div className="film-card__poster">
