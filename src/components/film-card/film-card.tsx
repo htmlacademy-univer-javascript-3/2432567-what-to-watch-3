@@ -3,7 +3,7 @@ import PreviewVideo from '../preview-video/preview-video';
 import { FilmCardProps } from './film.props';
 import { AppRoute } from '../../const';
 
-function FilmCard({ film, isPlaying = false, onMouseOver = () => null, onMouseOut = () => null }: FilmCardProps): JSX.Element {
+function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): JSX.Element {
   return (
     <article
       className="small-film-card catalog__films-card"

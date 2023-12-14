@@ -27,7 +27,10 @@ function AddReviewPage(): JSX.Element {
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={film.backgroundImage} alt={film.name} />
+          <img
+            src={film.backgroundImage}
+            alt={film.name}
+          />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -40,7 +43,9 @@ function AddReviewPage(): JSX.Element {
                 </Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.Film}/${film.id}/review`} className="breadcrumbs__link">Add review</Link>
+                <Link to={`${AppRoute.Film}/${film.id}/review`} className="breadcrumbs__link">
+                  Add review
+                </Link>
               </li>
             </ul>
           </nav>

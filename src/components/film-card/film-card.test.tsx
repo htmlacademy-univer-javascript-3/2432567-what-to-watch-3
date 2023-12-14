@@ -6,11 +6,12 @@ import { withHistory } from '../../mocks/mock-components';
 describe('Component: FilmCard', () => {
   it('render correctly', () => {
     const film = makeFakeFilmInList();
+    const fn = vi.fn;
 
     const dataTestIdForFilmCard = 'small-film-card-image';
 
     const preparedComponent = withHistory(
-      <FilmCard film={film}/>
+      <FilmCard film={film} isPlaying={false} onMouseOver={fn} onMouseOut={fn} />
     );
 
     render(preparedComponent);

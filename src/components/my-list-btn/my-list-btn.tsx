@@ -42,9 +42,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
         <use xlinkHref={!isFavorite || !authorizationStatus ? '#add' : '#in-list'} />
       </svg>
       <span>My list</span>
-      {
-        countFavoriteFilms > 0 && <span className="film-card__count">{countFavoriteFilms}</span>
-      }
+      {countFavoriteFilms > 0 && <span className="film-card__count">{countFavoriteFilms}</span>}
     </button>
   );
 }
