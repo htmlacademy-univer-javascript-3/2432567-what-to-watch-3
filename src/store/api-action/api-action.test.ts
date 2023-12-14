@@ -8,6 +8,7 @@ import { APIRoutes, NameSpace } from '../../const';
 import { addFavoriteFilm, dropFavoriteFilm, fetchAuthorizationStatus, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms, fetchLogin, fetchLogout, fetchReviews, sendReview } from './api-action';
 import { extractActionsTypes, makeFakeDataLogin, makeFakeFilm, makeFakeFilmId, makeFakeFilms, makeFakeReview, makeFakeReviews } from '../../mocks/mock';
 import { AppThunkDispatch } from '../../mocks/mock-types';
+import { redirectToRoute } from '../action';
 
 describe('Async actions', () => {
   const axios = createAxios();
@@ -351,6 +352,7 @@ describe('Async actions', () => {
       const actions = extractActionsTypes(store.getActions());
       expect(actions).toEqual([
         action.pending.type,
+        redirectToRoute.type,
         action.fulfilled.type,
       ]);
     });

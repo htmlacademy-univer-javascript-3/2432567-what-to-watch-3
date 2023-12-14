@@ -32,4 +32,10 @@ enum NameSpace {
   User = 'USER',
 }
 
-export { AppRoute, TabsType, APIRoutes, NameSpace };
+enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export { AppRoute, TabsType, APIRoutes, NameSpace, AuthorizationStatus };

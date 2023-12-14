@@ -5,7 +5,7 @@ import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
 import { humanizeFormate } from '../utils/date-reformat';
 import { User } from '../schemas/login';
 import { FormDataLogin } from '../schemas/forms';
-import { NameSpace } from '../const';
+import { AuthorizationStatus, NameSpace } from '../const';
 import { Genre, State } from '../types';
 
 const makeFakeReview = (): Review => ({
@@ -135,6 +135,7 @@ const makeFakeStore = (initialState?: Partial<State>): State => ({
   },
   [NameSpace.User]: {
     user: makeFakeUser(),
+    authorizationStatus: AuthorizationStatus.Auth,
     error: false,
   },
   ...initialState ?? {}

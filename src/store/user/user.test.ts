@@ -1,3 +1,4 @@
+import { AuthorizationStatus } from '../../const';
 import { makeFakeUser } from '../../mocks/mock';
 import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action/api-action';
 import { userReducer } from './user';
@@ -6,6 +7,7 @@ import { initialStateProps } from './user.props';
 describe('user slice', () => {
   const initialState: initialStateProps = {
     user: null,
+    authorizationStatus: AuthorizationStatus.Unknown,
     error: false,
   };
 
@@ -34,7 +36,7 @@ describe('user slice', () => {
   describe('fetchAuthorizationStatus', () => {
     it('fetchAuthorizationStatus.fulfilled', () => {
       const user = makeFakeUser();
-      const expectedState = { ...initialState, user };
+      const expectedState = { ...initialState, user, authorizationStatus: AuthorizationStatus.Auth };
 
       const result = userReducer(initialState, fetchAuthorizationStatus.fulfilled(user, '', undefined));
 
@@ -61,7 +63,7 @@ describe('user slice', () => {
 
     it('fetchLogin.fulfilled', () => {
       const user = makeFakeUser();
-      const expectedState = { ...initialState, user };
+      const expectedState = { ...initialState, user, authorizationStatus: AuthorizationStatus.Auth };
 
       const result = userReducer(initialState, fetchLogin.fulfilled(user, '', { email: '', password: '' }));
 
@@ -72,7 +74,7 @@ describe('user slice', () => {
   describe('fetchLogout', () => {
     it('fetchLogout.fulfilled', () => {
       const user = makeFakeUser();
-      const expectedState = { ...initialState };
+      const expectedState = { ...initialState, authorizationStatus: AuthorizationStatus.NoAuth };
 
       const result = userReducer({ ...initialState, user }, fetchLogout.fulfilled);
 

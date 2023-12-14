@@ -1,11 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../../types';
-import { APIRoutes } from '../../const';
+import { APIRoutes, AppRoute } from '../../const';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FilmInListType, FilmPromoType, FilmType } from '../../schemas/films';
 import { FormDataLogin, FormDataReview } from '../../schemas/forms';
 import { Review } from '../../schemas/review';
 import { ResultAuthorization, User } from '../../schemas/login';
+import { redirectToRoute } from '../action';
 
 const fetchFilms = createAsyncThunk<FilmInListType[], undefined, {
   dispatch: AppDispatch;
@@ -122,9 +123,12 @@ const fetchLogin = createAsyncThunk<User, FormDataLogin, {
   extra: AxiosInstance;
 }>(
   'user/login',
-  async (formData, { extra: api }) => await api
+  async (formData, { dispatch, extra: api }) => await api
     .post<ResultAuthorization>(APIRoutes.Login, formData)
-    .then(({ data }) => data as User)
+    .then(({ data }) => {
+      dispatch(redirectToRoute(AppRoute.Main));
+      return data as User;
+    })
 );
 
 const fetchLogout = createAsyncThunk<void, undefined, {

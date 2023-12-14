@@ -1,4 +1,4 @@
-import { NameSpace } from '../../const';
+import { AuthorizationStatus, NameSpace } from '../../const';
 import { makeFakeUser } from '../../mocks/mock';
 import { getAuthorizationStatus, getErrorUser, getUser } from './selectors';
 
@@ -6,13 +6,13 @@ describe('user selectors', () => {
   const state = {
     [NameSpace.User]: {
       user: makeFakeUser(),
+      authorizationStatus: AuthorizationStatus.Auth,
       error: false,
     }
   };
 
   it('getAuthorizationStatus', () => {
-    const { user } = state[NameSpace.User];
-    const status = Boolean(user);
+    const status = AuthorizationStatus.Auth;
 
     const result = getAuthorizationStatus(state);
 
