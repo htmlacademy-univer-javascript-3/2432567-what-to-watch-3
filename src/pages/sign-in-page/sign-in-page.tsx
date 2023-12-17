@@ -104,7 +104,6 @@ function SignInPage(): JSX.Element {
             <button
               className="sign-in__btn"
               type="submit"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={handleSubmit}
             >
               Sign in
