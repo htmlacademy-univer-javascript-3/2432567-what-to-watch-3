@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import UserBlock from '../../components/user-block/user-block/user-block';
 import { AppRoute } from '../../const';
 import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import Tabs from '../../components/tabs/tabs';
+import Tabs from '../../components/tabs/tabs/tabs';
 import { fetchFilm } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import Loading from '../../components/loading/loading';

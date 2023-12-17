@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { fetchAuthorizationStatus, fetchFilms } from './store/api-action/api-action';
 import HistoryRouter from './components/history-route/history-route';
-import browserHistory from './utils/browser-history';
+import browserHistory from './services/browser-history';
 import App from './components/app/App';
 import { ToastContainer } from 'react-toastify';
 

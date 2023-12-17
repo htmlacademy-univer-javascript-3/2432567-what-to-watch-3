@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getAuthorizationStatus } from '../../store/user/selectors';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { getCountFavoriteFilms } from '../../store/films/selectors';
 import { FilmPromoType, FilmType } from '../../schemas/films';
 import { addFavoriteFilm, dropFavoriteFilm } from '../../store/api-action/api-action';
@@ -11,7 +11,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const authorizationStatus = useAppSelector(getAuthorizationStatus) as boolean;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const countFavoriteFilms = useAppSelector(getCountFavoriteFilms) as number;
   const [isFavorite, setFavorite] = useState<boolean>(film.isFavorite);
 
@@ -20,7 +20,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
   }, [film]);
 
   const handlerOnClick = () => {
-    if (!authorizationStatus) {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.SignIn);
       return;
     }

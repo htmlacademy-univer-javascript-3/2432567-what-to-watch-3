@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import FilmsList from '../../components/film-list/film-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import UserBlock from '../../components/user-block/user-block/user-block';
 import { fetchFavoriteFilms } from '../../store/api-action/api-action';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FilmInListType } from '../../schemas/films';

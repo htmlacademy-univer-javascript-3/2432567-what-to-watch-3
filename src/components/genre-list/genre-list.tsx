@@ -4,7 +4,7 @@ import { Genre } from '../../types';
 import { getActiveGenre, getGenres } from '../../store/films/selectors';
 import { filmsActions } from '../../store/films/films';
 
-function GenreList(): JSX.Element {
+function GenresList(): JSX.Element {
   const genres = useAppSelector(getGenres) as Genre[];
   const activeGenre = useAppSelector(getActiveGenre) as Genre;
   const dispatch = useAppDispatch();
@@ -22,4 +22,4 @@ function GenreList(): JSX.Element {
   );
 }
 
-export default GenreList;
+export default GenresList;

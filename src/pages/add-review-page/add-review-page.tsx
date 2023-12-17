@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import UserBlock from '../../components/user-block/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Loading from '../../components/loading/loading';
@@ -60,7 +60,7 @@ function AddReviewPage(): JSX.Element {
           />
         </div>
       </div>
-      <FormReview />
+      <FormReview film={film} />
     </section>
   );
 }

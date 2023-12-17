@@ -66,10 +66,11 @@ function SignInPage(): JSX.Element {
             <div className="sign-in__field">
               <input
                 className="sign-in__input"
-                // type="email"
+                type="email"
                 placeholder="Email address"
                 name="email"
                 id="user-email"
+                data-testid='user-email'
                 onChange={handleFieldChange}
                 value={formData.email}
               />
@@ -87,6 +88,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="password"
                 id="user-password"
+                data-testid='user-password'
                 onChange={handleFieldChange}
                 value={formData.password}
               />

@@ -21,7 +21,7 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getAllByTestId('movie').length).toBe(8);
+    expect(screen.getAllByTestId('film').length).toBe(8);
     store[NameSpace.Film].genres.forEach((genre) => {
       expect(screen.getByText(genre)).toBeInTheDocument();
     });
@@ -38,7 +38,7 @@ describe('Application Routing', () => {
     render(withStoreComponent);
 
     expect(screen.getByText('Catalog')).toBeInTheDocument();
-    expect(screen.getAllByTestId('movie')).not.toHaveLength(0);
+    expect(screen.getAllByTestId('film')).not.toHaveLength(0);
   });
 
   it('should render the "SignIn" when user navigate to "/login"', () => {
@@ -82,7 +82,7 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getByText('404 Not Found')).toBeInTheDocument();
+    expect(screen.getByText('404. Страница не найдена')).toBeInTheDocument();
     expect(screen.getByText('Главная страница')).toBeInTheDocument();
   });
 });

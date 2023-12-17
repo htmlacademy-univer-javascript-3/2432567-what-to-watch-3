@@ -4,8 +4,8 @@ import { AppRoute } from '../../const';
 function NotFoundScreen(): JSX.Element {
   return (
     <>
-      <h1>404 Not Found</h1>
-      <Link to={AppRoute.Main}>Главная страница</Link >
+      <h1>404. Страница не найдена</h1>
+      <Link to={AppRoute.Main} data-testid='link-main-page'>Главная страница</Link >
     </>
   );
 }

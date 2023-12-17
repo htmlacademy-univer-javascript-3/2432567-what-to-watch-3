@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { AppRoute } from '../../const';
-import { fetchLogout } from '../../store/api-action/api-action';
-import { User } from '../../schemas/login';
-import { getUser } from '../../store/user/selectors';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { AppRoute } from '../../../const';
+import { fetchLogout } from '../../../store/api-action/api-action';
+import { User } from '../../../schemas/login';
+import { getUser } from '../../../store/user/selectors';
 
 function AuthorizationUserBlock(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ function AuthorizationUserBlock(): JSX.Element {
   };
 
   return (
-    <ul className="user-block">
+    <ul className="user-block" data-testid='authorization-block'>
       <li className="user-block__item">
         <Link to={AppRoute.MyList}>
           <div className="user-block__avatar">
