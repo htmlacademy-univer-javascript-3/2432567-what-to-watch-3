@@ -1,4 +1,4 @@
-import { Review } from '../../schemas/review';
+import { Review } from '../../../schemas/review';
 
 type TabsProps = {
   reviews: Review[];

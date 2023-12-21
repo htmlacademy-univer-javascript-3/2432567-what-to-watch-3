@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { PreviewVideoProps } from './preview-video.prop';
 
-function PreviewVideo({ linkVideo, linkPoster, isPlaying }: PreviewVideoProps) {
+function PreviewVideo({ film, isPlaying }: PreviewVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -39,13 +39,14 @@ function PreviewVideo({ linkVideo, linkPoster, isPlaying }: PreviewVideoProps) {
 
   return (
     <video
-      poster={linkPoster}
+      poster={film.previewImage}
       ref={videoRef}
       width="280"
       height="175"
       muted
+      data-testid='preview-player'
     >
-      <source src={linkVideo} />
+      <source src={film.previewVideoLink} />
     </video>
   );
 }

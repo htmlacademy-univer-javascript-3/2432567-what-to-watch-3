@@ -1,37 +1,36 @@
 import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Rating from '../rating/rating';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch } from '../../store/hooks';
 import { sendReview } from '../../store/api-action/api-action';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { FormDataReview } from '../../schemas/forms';
 import { FilmType } from '../../schemas/films';
-import { getFilm } from '../../store/films/selectors';
 
 
-function FormReview() {
+function FormReview({ film }: { film: FilmType}) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const film = useAppSelector(getFilm) as FilmType;
+
   const [formData, setFormData] = useState<FormDataReview>({
     rating: 0,
     reviewText: '',
   });
   const [isValid, setIsValid] = useState(false);
 
-  const handlerValidate = () => {
+  const handleValidate = () => {
     setIsValid(
       formData.rating !== 0 && formData.reviewText.length >= 50 && formData.reviewText.length <= 400
     );
   };
 
-  const handlerFieldChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
+  const handleFieldChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: name === 'rating' ? Number(value) : value });
-    handlerValidate();
+    handleValidate();
   };
 
-  const handlerSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
+  const handleSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
     if (isValid) {
       dispatch(sendReview({ ...formData, id: film.id }));
@@ -41,21 +40,21 @@ function FormReview() {
   return (
     <div className="add-review">
       <form action="#" className="add-review__form">
-        <Rating setRating={handlerFieldChange} />
+        <Rating setRating={handleFieldChange} />
         <div className="add-review__text">
           <textarea
             className="add-review__textarea"
             name="reviewText"
             id="reviewText"
             placeholder="Review text"
-            onChange={handlerFieldChange}
+            onChange={handleFieldChange}
             value={formData.reviewText}
           />
           <div className="add-review__submit">
             <button
               className="add-review__btn"
               type="submit"
-              onClick={handlerSubmit}
+              onClick={handleSubmit}
               disabled={!isValid}
             >
               Post

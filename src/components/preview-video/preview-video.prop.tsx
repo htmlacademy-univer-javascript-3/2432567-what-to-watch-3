@@ -1,6 +1,7 @@
+import { FilmInListType } from '../../schemas/films';
+
 type PreviewVideoProps = {
-  linkVideo: string;
-  linkPoster: string;
+  film: FilmInListType;
   isPlaying: boolean;
 }
 

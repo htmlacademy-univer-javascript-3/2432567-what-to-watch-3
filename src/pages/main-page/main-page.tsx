@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import FilmsList from '../../components/film-list/film-list';
 import FilmPromo from '../../components/film-promo/film-promo';
 import Footer from '../../components/footer/footer';
-import GenreList from '../../components/genre-list/genre-list';
+import GenresList from '../../components/genre-list/genre-list';
 import Logo from '../../components/logo/logo';
-import UserBlock from '../../components/user-block/user-block';
+import UserBlock from '../../components/user-block/user-block/user-block';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Loading from '../../components/loading/loading';
 import { FilmInListType, FilmPromoType } from '../../schemas/films';
@@ -49,7 +49,7 @@ function MainPage(): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenreList />
+          <GenresList />
           <FilmsList films={
             genre === 'All genres' ? films : films.filter((item) => item.genre === genre)
           }
