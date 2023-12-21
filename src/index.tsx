@@ -8,7 +8,9 @@ import browserHistory from './services/browser-history';
 import App from './components/app/App';
 import { ToastContainer } from 'react-toastify';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
 store.dispatch(fetchFilms());
 store.dispatch(fetchAuthorizationStatus());
