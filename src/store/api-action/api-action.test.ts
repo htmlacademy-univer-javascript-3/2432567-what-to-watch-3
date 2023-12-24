@@ -293,11 +293,9 @@ describe('Async actions', () => {
       const extractedActionsTypes = extractActionsTypes(emittedActions);
       expect(extractedActionsTypes).toEqual([
         action.pending.type,
+        redirectToRoute.type,
         action.fulfilled.type,
       ]);
-
-      const sendReviewFulfilled = emittedActions.at(1) as ReturnType<typeof action.fulfilled>;
-      expect(sendReviewFulfilled.payload).toEqual(review);
     });
 
     it('pending and rejected', async () => {

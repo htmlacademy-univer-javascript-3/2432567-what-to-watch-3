@@ -14,7 +14,7 @@ describe('Component: TabOverview', () => {
 
     expect(screen.getByText(`Director: ${film.director}`)).toBeInTheDocument();
 
-    expect(screen.getByText(`Starring: ${film.starring?.slice(0, 4).join(', ')} and other`)).toBeInTheDocument();
+    expect(screen.getByText(`Starring: ${film.starring?.slice(0, 4).join(', ')}`)).toBeInTheDocument();
 
     expect(screen.getByText(`${film.scoresCount} rating`)).toBeInTheDocument();
 
