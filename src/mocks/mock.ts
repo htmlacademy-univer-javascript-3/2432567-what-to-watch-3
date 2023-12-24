@@ -126,6 +126,7 @@ const makeFakeStore = (initialState?: Partial<State>): State => ({
     films: makeFakeFilms(),
     filmPromo: makeFakePromoFilm(),
     favoriteFilms: makeFakeFilms(),
+    statusLoading: false,
     hasError: false,
   },
   [NameSpace.Review]: {

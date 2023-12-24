@@ -6,7 +6,7 @@ import Footer from '../../components/footer/footer';
 import GenresList from '../../components/genre-list/genre-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FilmInListType, FilmPromoType } from '../../schemas/films';
-import { getActiveGenre, getFilmPromo, getFilms } from '../../store/films/selectors';
+import { getActiveGenre, getFilmPromo, getFilms, getStatusLoading } from '../../store/films/selectors';
 import { filmsActions } from '../../store/films/films';
 import { Genre } from '../../types';
 import { fetchFilmPromo } from '../../store/api-action/api-action';
@@ -19,13 +19,14 @@ function MainPage(): JSX.Element {
   const film = useAppSelector(getFilmPromo) as FilmPromoType;
   const films = useAppSelector(getFilms) as FilmInListType[];
   const genre = useAppSelector(getActiveGenre) as Genre;
+  const statusLoading = useAppSelector(getStatusLoading);
 
   useEffect(() => {
     dispatch(filmsActions.defaultGenreAction());
     dispatch(fetchFilmPromo());
   }, [dispatch]);
 
-  if (!film || !films) {
+  if (statusLoading) {
     return <Spinner />;
   }
   return (

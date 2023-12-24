@@ -7,16 +7,21 @@ import UserBlock from '../../components/user-block/user-block/user-block';
 import { fetchFavoriteFilms } from '../../store/api-action/api-action';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FilmInListType } from '../../schemas/films';
-import { getFavoriteFilms } from '../../store/films/selectors';
+import { getFavoriteFilms, getStatusLoading } from '../../store/films/selectors';
+import Spinner from '../../components/spinner/spinner';
 
 function MyListPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const films = useAppSelector(getFavoriteFilms) as FilmInListType[];
+  const statusLoading = useAppSelector(getStatusLoading);
 
   useEffect(() => {
     dispatch(fetchFavoriteFilms());
   }, [dispatch]);
 
+  if (statusLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="user-page">
       <Helmet>

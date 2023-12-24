@@ -11,6 +11,7 @@ type initialStateProps = {
   filmPromo: FilmPromoType | null;
   similarFilms: FilmInListType[];
   favoriteFilms: FilmInListType[];
+  statusLoading: boolean;
   hasError: boolean;
 }
 

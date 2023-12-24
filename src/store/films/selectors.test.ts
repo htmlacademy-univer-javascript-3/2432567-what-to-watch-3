@@ -21,6 +21,7 @@ describe('films selectors', () => {
       isFilmsLoading: true,
       filmPromo: makeFakePromoFilm(),
       favoriteFilms: makeFakeFilms(),
+      statusLoading: false,
       hasError: false,
     }
   };

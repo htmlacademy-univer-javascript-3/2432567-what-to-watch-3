@@ -11,7 +11,7 @@ import Tabs from '../../components/tabs/tabs/tabs';
 import { fetchFilm } from '../../store/api-action/api-action';
 import { NotFoundPage } from '../../components/app/all-pages';
 import { FilmInListType, FilmType } from '../../schemas/films';
-import { getErrorFilm, getFilm, getSimilarFilms } from '../../store/films/selectors';
+import { getErrorFilm, getFilm, getSimilarFilms, getStatusLoading } from '../../store/films/selectors';
 import MyListButton from '../../components/my-list-button/my-list-button';
 import Spinner from '../../components/spinner/spinner';
 
@@ -22,6 +22,7 @@ function MoviePage(): JSX.Element {
   const film = useAppSelector(getFilm) as FilmType;
   const films = useAppSelector(getSimilarFilms) as FilmInListType[];
   const error = useAppSelector(getErrorFilm) as boolean;
+  const statusLoading = useAppSelector(getStatusLoading);
 
   useEffect(() => {
     if (id && id !== film?.id) {
@@ -32,7 +33,7 @@ function MoviePage(): JSX.Element {
   if (error) {
     return <NotFoundPage />;
   }
-  if (film === null) {
+  if (statusLoading) {
     return <Spinner />;
   }
   return (

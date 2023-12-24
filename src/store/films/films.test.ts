@@ -15,6 +15,7 @@ describe('films slice', () => {
     filmPromo: null,
     similarFilms: [],
     favoriteFilms: [],
+    statusLoading: false,
     hasError: false,
   };
 
