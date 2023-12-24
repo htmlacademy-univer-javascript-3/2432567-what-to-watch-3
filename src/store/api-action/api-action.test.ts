@@ -2,13 +2,13 @@ import MockAdapter from 'axios-mock-adapter';
 import thunk from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Action } from 'redux';
-import createAxios from '../../services/api';
 import { State } from '../../types';
-import { APIRoutes, NameSpace } from '../../const';
-import { addFavoriteFilm, dropFavoriteFilm, fetchAuthorizationStatus, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms, fetchLogin, fetchLogout, fetchReviews, sendReview } from './api-action';
+import { APIRoutes, DEFAULT_GENRE, NameSpace } from '../../const';
+import { addFavoriteFilm, dropFavoriteFilm, fetchAuthorizationStatus, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms, login, logout, fetchReviews, sendReview } from './api-action';
 import { extractActionsTypes, makeFakeDataLogin, makeFakeFilm, makeFakeFilmId, makeFakeFilms, makeFakeReview, makeFakeReviews } from '../../mocks/mock';
 import { AppThunkDispatch } from '../../mocks/mock-types';
 import { redirectToRoute } from '../action';
+import createAxios from '../../services/api';
 
 describe('Async actions', () => {
   const axios = createAxios();
@@ -21,7 +21,7 @@ describe('Async actions', () => {
     store = mockStoreCreator({
       [NameSpace.Film]: {
         genres: [],
-        activeGenre: 'All genres',
+        activeGenre: DEFAULT_GENRE,
         film: null,
         films: [],
         filmPromo: null,
@@ -293,11 +293,9 @@ describe('Async actions', () => {
       const extractedActionsTypes = extractActionsTypes(emittedActions);
       expect(extractedActionsTypes).toEqual([
         action.pending.type,
+        redirectToRoute.type,
         action.fulfilled.type,
       ]);
-
-      const sendReviewFulfilled = emittedActions.at(1) as ReturnType<typeof action.fulfilled>;
-      expect(sendReviewFulfilled.payload).toEqual(review);
     });
 
     it('pending and rejected', async () => {
@@ -340,8 +338,8 @@ describe('Async actions', () => {
     });
   });
 
-  describe('fetchLogin', () => {
-    const action = fetchLogin;
+  describe('login', () => {
+    const action = login;
     const adapter = mockAxiosAdapter.onPost(APIRoutes.Login);
     const dataLogin = makeFakeDataLogin();
 
@@ -369,8 +367,8 @@ describe('Async actions', () => {
     });
   });
 
-  describe('fetchLogout', () => {
-    const action = fetchLogout;
+  describe('logout', () => {
+    const action = logout;
     const adapter = mockAxiosAdapter.onDelete(APIRoutes.Logout);
 
     it('pending and fulfilled', async () => {

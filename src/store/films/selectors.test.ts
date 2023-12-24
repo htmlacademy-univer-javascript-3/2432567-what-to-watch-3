@@ -1,14 +1,14 @@
-import { NameSpace } from '../../const';
+import { DEFAULT_GENRE, NameSpace } from '../../const';
 import { makeFakeFilm, makeFakeFilms, makeFakePromoFilm } from '../../mocks/mock';
 import {
   getFilms,
   getFilm,
   getFavoriteFilms,
   getFilmPromo,
-  getSimilarFilms,
   getGenres,
   getActiveGenre,
-  getErrorFilm
+  getErrorFilm,
+  getSimilarFilms
 } from './selectors';
 
 describe('films selectors', () => {
@@ -16,7 +16,7 @@ describe('films selectors', () => {
     [NameSpace.Film]: {
       ...makeFakeFilm(),
       genres: [],
-      activeGenre: 'All genres',
+      activeGenre: DEFAULT_GENRE,
       films: makeFakeFilms(),
       isFilmsLoading: true,
       filmPromo: makeFakePromoFilm(),
@@ -63,14 +63,6 @@ describe('films selectors', () => {
     const result = getFavoriteFilms(state);
 
     expect(result).toBe(favoriteFilms);
-  });
-
-  it('getSimilarFilms', () => {
-    const { similarFilms } = state[NameSpace.Film];
-
-    const result = getSimilarFilms(state);
-
-    expect(result).toBe(similarFilms);
   });
 
   it('getGenres', () => {

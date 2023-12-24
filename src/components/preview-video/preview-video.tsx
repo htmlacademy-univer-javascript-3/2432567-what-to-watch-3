@@ -5,7 +5,7 @@ function PreviewVideo({ film, isPlaying }: PreviewVideoProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handlerLoadedData = () => {
+  const handleLoadedData = () => {
     setIsLoaded(true);
   };
 
@@ -16,10 +16,10 @@ function PreviewVideo({ film, isPlaying }: PreviewVideoProps) {
       return;
     }
 
-    video.addEventListener('loadeddata', handlerLoadedData);
+    video.addEventListener('loadeddata', handleLoadedData);
 
     return () => {
-      video.removeEventListener('loadeddata', handlerLoadedData);
+      video.removeEventListener('loadeddata', handleLoadedData);
     };
   }, []);
 

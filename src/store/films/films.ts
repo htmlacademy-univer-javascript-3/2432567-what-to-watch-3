@@ -1,14 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const.ts';
+import { DEFAULT_GENRE, NameSpace } from '../../const.ts';
 import { FilmPromoType, FilmType } from '../../schemas/films.ts';
 import { Genre } from '../../types.ts';
 import { addFavoriteFilm, dropFavoriteFilm, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms } from '../api-action/api-action.ts';
 import { initialStateProps } from './films.props.ts';
-import findGenres from '../../utils/get-genres.ts';
+import { findGenres } from '../../utils/utils.ts';
 
 const initialState: initialStateProps = {
   genres: [],
-  activeGenre: 'All genres',
+  activeGenre: DEFAULT_GENRE,
   film: null,
   films: [],
   filmPromo: null,
@@ -30,7 +30,7 @@ const { reducer: filmsReducer, actions: filmsActions } = createSlice({
   initialState,
   reducers: {
     defaultGenreAction: (state) => {
-      state.activeGenre = 'All genres';
+      state.activeGenre = DEFAULT_GENRE;
     },
     setActiveGenreAction: (state, action: PayloadAction<Genre>) => {
       state.activeGenre = action.payload;

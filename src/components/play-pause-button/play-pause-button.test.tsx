@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import PlayPauseBtn from './play-pause-btn';
+import PlayPauseBtn from './play-pause-button';
 
 describe('Component: PauseButton', () => {
   it('should render correct', () => {

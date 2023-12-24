@@ -12,8 +12,8 @@ describe('Page: NotFound', () => {
 
     render(withHistoryComponent);
 
-    expect(screen.getByText('404. Страница не найдена')).toBeInTheDocument();
-    expect(screen.getByText('Главная страница')).toBeInTheDocument();
+    expect(screen.getByText('Страница не найдена')).toBeInTheDocument();
+    expect(screen.getByText('Вернуться на главную страницу')).toBeInTheDocument();
   });
 
   it('should navigate to main page when clicks a button', async () => {

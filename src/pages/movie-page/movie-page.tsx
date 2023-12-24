@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
@@ -7,12 +9,11 @@ import FilmsList from '../../components/film-list/film-list';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import Tabs from '../../components/tabs/tabs/tabs';
 import { fetchFilm } from '../../store/api-action/api-action';
-import { useEffect } from 'react';
-import Loading from '../../components/loading/loading';
 import { NotFoundPage } from '../../components/app/all-pages';
 import { FilmInListType, FilmType } from '../../schemas/films';
 import { getErrorFilm, getFilm, getSimilarFilms } from '../../store/films/selectors';
-import MyListButton from '../../components/my-list-btn/my-list-btn';
+import MyListButton from '../../components/my-list-button/my-list-button';
+import Spinner from '../../components/spinner/spinner';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
@@ -23,18 +24,23 @@ function MoviePage(): JSX.Element {
   const error = useAppSelector(getErrorFilm) as boolean;
 
   useEffect(() => {
-    dispatch(fetchFilm(id as string));
-  }, [dispatch, id]);
+    if (id && id !== film?.id) {
+      dispatch(fetchFilm(id));
+    }
+  }, [dispatch, film, id]);
 
   if (error) {
     return <NotFoundPage />;
   }
   if (film === null) {
-    return <Loading />;
+    return <Spinner />;
   }
   return (
     <>
       <section className="film-card film-card--full">
+        <Helmet>
+          <title>{film.name}</title>
+        </Helmet>
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={film.backgroundImage} alt={film.name} />
@@ -59,6 +65,9 @@ function MoviePage(): JSX.Element {
                   <span>Play</span>
                 </Link>
                 <MyListButton film={film} />
+                <Link to={`${AppRoute.Film}/${film.id}/review`} className="btn film-card__button">
+                  Add review
+                </Link>
               </div>
             </div>
           </div>
@@ -75,12 +84,11 @@ function MoviePage(): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films} />
+          <FilmsList films={films.slice(0, 4)} />
         </section>
         <Footer />
       </div>
     </>
-
   );
 }
 

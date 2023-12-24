@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import FullScreenBtn from './full-screen-btn';
+import FullScreenBtn from './full-screen-button';
 
 describe('Component: FullScreenButton', () => {
   it('should render correct', () => {

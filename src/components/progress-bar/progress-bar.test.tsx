@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import ProgressBar from './progress-bar.tsx';
 import { expect } from 'vitest';
-import getRemainTime from '../../utils/remain-time.ts';
+import { getRemainTime } from '../../utils/utils.ts';
 
 describe('Component: ProgressBar', () => {
   it('should render correct', () => {

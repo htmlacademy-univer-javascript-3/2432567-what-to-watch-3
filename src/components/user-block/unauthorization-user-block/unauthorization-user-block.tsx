@@ -5,9 +5,7 @@ function UnauthorizationUserBlock(): JSX.Element {
   return (
     <ul className="user-block" data-testid='unauthorization-block'>
       <li className="user-block__item">
-        <Link to={AppRoute.SignIn} className="user-block__link">
-          Sign In
-        </Link>
+        <Link to={AppRoute.SignIn} className="user-block__link">Sign In</Link>
       </li>
     </ul>
   );

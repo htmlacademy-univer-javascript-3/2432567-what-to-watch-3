@@ -3,7 +3,7 @@ import { Genre } from '../../types';
 type GenreLinkProps = {
   genre: Genre;
   onClick: (genre: Genre) => void;
-  activeGenre: Genre;
+  isActiveGenre: boolean;
 }
 
 export type { GenreLinkProps };

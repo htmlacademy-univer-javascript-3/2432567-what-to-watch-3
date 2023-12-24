@@ -2,39 +2,33 @@ import { ChangeEventHandler, FormEventHandler, useState } from 'react';
 import Rating from '../rating/rating';
 import { useAppDispatch } from '../../store/hooks';
 import { sendReview } from '../../store/api-action/api-action';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { LENGTH_TEXT_REVIEW } from '../../const';
 import { FormDataReview } from '../../schemas/forms';
 import { FilmType } from '../../schemas/films';
 
 
-function FormReview({ film }: { film: FilmType}) {
+function FormReview({ film }: { film: FilmType }) {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<FormDataReview>({
     rating: 0,
     reviewText: '',
   });
-  const [isValid, setIsValid] = useState(false);
 
-  const handleValidate = () => {
-    setIsValid(
-      formData.rating !== 0 && formData.reviewText.length >= 50 && formData.reviewText.length <= 400
-    );
-  };
+  const validate = () => formData.rating !== 0 &&
+    formData.reviewText.length >= LENGTH_TEXT_REVIEW.MIN &&
+    formData.reviewText.length <= LENGTH_TEXT_REVIEW.MAX;
 
   const handleFieldChange: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (evt) => {
     const { name, value } = evt.target;
     setFormData({ ...formData, [name]: name === 'rating' ? Number(value) : value });
-    handleValidate();
+    validate();
   };
 
-  const handleSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
+  const handleFormSubmit: FormEventHandler<HTMLButtonElement> = (evt) => {
     evt.preventDefault();
-    if (isValid) {
+    if (validate()) {
       dispatch(sendReview({ ...formData, id: film.id }));
-      navigate(`${AppRoute.Film}/${film.id}`);
     }
   };
   return (
@@ -54,8 +48,8 @@ function FormReview({ film }: { film: FilmType}) {
             <button
               className="add-review__btn"
               type="submit"
-              onClick={handleSubmit}
-              disabled={!isValid}
+              onClick={handleFormSubmit}
+              disabled={!validate()}
             >
               Post
             </button>

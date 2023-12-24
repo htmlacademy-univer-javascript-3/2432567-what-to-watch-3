@@ -3,7 +3,7 @@ import { withHistory, withStore } from '../../mocks/mock-components.tsx';
 import { render, screen } from '@testing-library/react';
 import { NameSpace } from '../../const.ts';
 import { makeFakeFilm, makeFakeStore } from '../../mocks/mock.ts';
-import MyListButton from './my-list-btn.tsx';
+import MyListButton from './my-list-button.tsx';
 import { initialStateProps } from '../../store/films/films.props.ts';
 import { MemoryHistory, createMemoryHistory } from 'history';
 

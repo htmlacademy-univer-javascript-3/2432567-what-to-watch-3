@@ -1,5 +1,5 @@
 import { FilmType } from '../../../schemas/films';
-import { durationFormate } from '../../../utils/date-reformat';
+import { durationFormate } from '../../../utils/utils';
 
 function TabDetails({ film }: { film: FilmType }): JSX.Element {
   return (

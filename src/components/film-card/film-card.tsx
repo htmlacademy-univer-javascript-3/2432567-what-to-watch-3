@@ -11,17 +11,12 @@ function FilmCard({ film, isPlaying, onMouseOver, onMouseOut }: FilmCardProps): 
       onMouseOut={() => onMouseOut()}
       data-testid='film'
     >
-      <div className="small-film-card__image" data-testid="small-film-card-image">
-        <PreviewVideo
-          film={film}
-          isPlaying={isPlaying}
-        />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`${AppRoute.Film}/${film.id}`}>
-          {film.name}
-        </Link>
-      </h3>
+      <Link className="small-film-card__link" to={`${AppRoute.Film}/${film.id}`}>
+        <div className="small-film-card__image" data-testid="small-film-card-image">
+          <PreviewVideo film={film} isPlaying={isPlaying} />
+        </div>
+        <h3 className="small-film-card__title">{film.name}</h3>
+      </Link>
     </article>
   );
 }

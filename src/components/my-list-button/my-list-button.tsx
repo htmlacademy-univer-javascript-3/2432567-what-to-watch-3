@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { getAuthorizationStatus } from '../../store/user/selectors';
@@ -5,7 +6,6 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { getCountFavoriteFilms } from '../../store/films/selectors';
 import { FilmPromoType, FilmType } from '../../schemas/films';
 import { addFavoriteFilm, dropFavoriteFilm } from '../../store/api-action/api-action';
-import { useEffect, useState } from 'react';
 
 function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
     setFavorite(film.isFavorite);
   }, [film]);
 
-  const handlerOnClick = () => {
+  const handleOnClick = () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
       navigate(AppRoute.SignIn);
       return;
@@ -36,7 +36,7 @@ function MyListButton({ film }: { film: FilmType | FilmPromoType }): JSX.Element
     <button
       className="btn btn--list film-card__button"
       type="button"
-      onClick={handlerOnClick}
+      onClick={handleOnClick}
     >
       <svg viewBox="0 0 19 20" width="19" height="20">
         <use xlinkHref={!isFavorite || !authorizationStatus ? '#add' : '#in-list'} />

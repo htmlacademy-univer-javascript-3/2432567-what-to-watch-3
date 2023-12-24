@@ -2,11 +2,11 @@ import { name, datatype, random, finance, image, internet } from 'faker';
 import { Action } from '@reduxjs/toolkit';
 import { Review } from '../schemas/review';
 import { FilmInListType, FilmPromoType, FilmType } from '../schemas/films';
-import { humanizeFormate } from '../utils/date-reformat';
 import { User } from '../schemas/login';
 import { FormDataLogin } from '../schemas/forms';
-import { AuthorizationStatus, NameSpace } from '../const';
+import { AuthorizationStatus, DEFAULT_GENRE, NameSpace } from '../const';
 import { Genre, State } from '../types';
+import { humanizeFormate } from '../utils/utils';
 
 const makeFakeReview = (): Review => ({
   id: random.alpha({ count: 10 }),
@@ -121,7 +121,7 @@ const makeFakeGenres = (): Genre[] => [random.word(), random.word(), random.word
 const makeFakeStore = (initialState?: Partial<State>): State => ({
   [NameSpace.Film]: {
     genres: makeFakeGenres(),
-    activeGenre: 'All genres',
+    activeGenre: DEFAULT_GENRE,
     ...makeFakeFilm(),
     films: makeFakeFilms(),
     filmPromo: makeFakePromoFilm(),
