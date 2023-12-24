@@ -3,13 +3,16 @@ import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { FormDataLogin } from '../../schemas/forms';
-import { fetchLogin } from '../../store/api-action/api-action';
+import { login } from '../../store/api-action/api-action';
 import { getErrorUser } from '../../store/user/selectors';
+import cn from 'classnames';
+import { Helmet } from 'react-helmet-async';
 
 function SignInPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const message = useAppSelector(getErrorUser) as boolean;
+
   const [errors, setErrors] = useState<string[]>([]);
 
   const [formData, setFormData] = useState<FormDataLogin>({
@@ -40,15 +43,18 @@ function SignInPage(): JSX.Element {
     setFormData({ ...formData, [name]: value });
   };
 
-  function handleSubmit(evt: FormEvent<HTMLButtonElement>) {
+  function handleSignInSubmit(evt: FormEvent<HTMLButtonElement>) {
     evt.preventDefault();
     if (validate()) {
-      dispatch(fetchLogin(formData));
+      dispatch(login(formData));
     }
   }
 
   return (
     <div className="user-page">
+      <Helmet>
+        <title>Вход</title>
+      </Helmet>
       <header className="page-header user-page__head">
         <Logo />
         <h1 className="page-title user-page__title">Sign in</h1>
@@ -63,9 +69,9 @@ function SignInPage(): JSX.Element {
             )
           }
           <div className="sign-in__fields">
-            <div className="sign-in__field">
+            <div className={cn('sign-in__field', errors.indexOf('Неполадки с email') !== -1 && 'sign-in__field--error')}>
               <input
-                className="sign-in__input"
+                className='sign-in__input'
                 type="email"
                 placeholder="Email address"
                 name="email"
@@ -81,7 +87,7 @@ function SignInPage(): JSX.Element {
                 Email address
               </label>
             </div>
-            <div className="sign-in__field">
+            <div className={cn('sign-in__field', errors.indexOf('Неполадки с паролем') !== -1 && 'sign-in__field--error')}>
               <input
                 className="sign-in__input"
                 type="password"
@@ -104,7 +110,7 @@ function SignInPage(): JSX.Element {
             <button
               className="sign-in__btn"
               type="submit"
-              onClick={handleSubmit}
+              onClick={handleSignInSubmit}
             >
               Sign in
             </button>

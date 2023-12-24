@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { makeFakeFilm } from '../../../mocks/mock';
 import { withHistory } from '../../../mocks/mock-components';
 import TabDetails from './tab-details';
-import { durationFormate } from '../../../utils/date-reformat';
+import { durationFormate } from '../../../utils/utils';
 
 describe('Component: TabDetails', () => {
   it('render correctly', () => {

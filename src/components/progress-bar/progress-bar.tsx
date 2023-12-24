@@ -1,8 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
-import getRemainTime from '../../utils/remain-time';
+import { getRemainTime } from '../../utils/utils';
 
-function ProgressBar({ currentTime, duration }: { currentTime: number; duration: number }): JSX.Element {
+function ProgressBarComponent({ currentTime, duration }: { currentTime: number; duration: number }): JSX.Element {
   return (
     <div className="player__controls-row">
       <div className="player__time">
@@ -20,4 +19,5 @@ function ProgressBar({ currentTime, duration }: { currentTime: number; duration:
   );
 }
 
-export default React.memo(ProgressBar);
+const ProgressBar = React.memo(ProgressBarComponent);
+export default ProgressBar;

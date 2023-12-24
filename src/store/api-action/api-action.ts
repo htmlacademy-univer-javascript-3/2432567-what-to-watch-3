@@ -98,12 +98,15 @@ const sendReview = createAsyncThunk<Review, FormDataReview & { id: string }, {
   extra: AxiosInstance;
 }>(
   'reviews/sendReviews',
-  async ({ rating, reviewText: text, id }, { extra: api }) => await api
+  async ({ rating, reviewText: text, id }, { dispatch, extra: api }) => await api
     .post<Review>(APIRoutes.Reviews(id), {
       comment: text,
       rating
     })
-    .then(({ data }) => data)
+    .then(({ data }) => {
+      dispatch(redirectToRoute(`${AppRoute.Film}/${id}`));
+      return data;
+    })
 );
 
 const fetchAuthorizationStatus = createAsyncThunk<User, undefined, {
@@ -117,7 +120,7 @@ const fetchAuthorizationStatus = createAsyncThunk<User, undefined, {
     .then(({ data }) => data as User)
 );
 
-const fetchLogin = createAsyncThunk<User, FormDataLogin, {
+const login = createAsyncThunk<User, FormDataLogin, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -131,7 +134,7 @@ const fetchLogin = createAsyncThunk<User, FormDataLogin, {
     })
 );
 
-const fetchLogout = createAsyncThunk<void, undefined, {
+const logout = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -152,6 +155,6 @@ export {
   fetchReviews,
   sendReview,
   fetchAuthorizationStatus,
-  fetchLogin,
-  fetchLogout
+  login,
+  logout
 };

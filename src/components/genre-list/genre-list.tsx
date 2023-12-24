@@ -9,14 +9,14 @@ function GenresList(): JSX.Element {
   const activeGenre = useAppSelector(getActiveGenre) as Genre;
   const dispatch = useAppDispatch();
 
-  const handlerOnClick = (genre: Genre) => {
+  const handleGenreClick = (genre: Genre) => {
     dispatch(filmsActions.setActiveGenreAction(genre));
   };
 
   return (
     <ul className="catalog__genres-list">
       {genres.map((genre) =>
-        <GenreLink key={genre} genre={genre} activeGenre={activeGenre} onClick={handlerOnClick} />
+        <GenreLink key={genre} genre={genre} isActiveGenre={genre === activeGenre} onClick={handleGenreClick} />
       )}
     </ul>
   );

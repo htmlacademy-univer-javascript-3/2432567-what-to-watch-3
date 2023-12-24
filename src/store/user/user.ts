@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../const.ts';
-import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action/api-action.ts';
+import { fetchAuthorizationStatus, login, logout } from '../api-action/api-action.ts';
 import { dropToken, setToken } from '../../services/token.ts';
 import { User } from '../../schemas/login.ts';
 import { initialStateProps } from './user.props.ts';
@@ -19,29 +19,31 @@ const rejected = (state: initialStateProps) => {
   state.error = true;
 };
 
-const login = (state: initialStateProps, action: PayloadAction<User>) => {
-  state.user = action.payload;
-  state.authorizationStatus = AuthorizationStatus.Auth;
-  setToken(action.payload.token);
-};
-
-const logout = (state: initialStateProps) => {
-  state.user = null;
-  state.authorizationStatus = AuthorizationStatus.NoAuth;
-  dropToken();
-};
-
 const { reducer: userReducer, actions: userActions } = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchAuthorizationStatus.fulfilled, login)
-      .addCase(fetchLogin.pending, pending)
-      .addCase(fetchLogin.rejected, rejected)
-      .addCase(fetchLogin.fulfilled, login)
-      .addCase(fetchLogout.fulfilled, logout);
+      .addCase(fetchAuthorizationStatus.rejected, (state: initialStateProps) => {
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+      })
+      .addCase(fetchAuthorizationStatus.fulfilled, (state: initialStateProps, action: PayloadAction<User>) => {
+        state.user = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
+      })
+      .addCase(login.pending, pending)
+      .addCase(login.rejected, rejected)
+      .addCase(login.fulfilled, (state: initialStateProps, action: PayloadAction<User>) => {
+        state.user = action.payload;
+        state.authorizationStatus = AuthorizationStatus.Auth;
+        setToken(action.payload.token);
+      })
+      .addCase(logout.fulfilled, (state: initialStateProps) => {
+        state.user = null;
+        state.authorizationStatus = AuthorizationStatus.NoAuth;
+        dropToken();
+      });
   },
 });
 

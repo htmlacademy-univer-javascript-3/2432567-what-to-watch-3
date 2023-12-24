@@ -82,7 +82,7 @@ describe('Application Routing', () => {
 
     render(withStoreComponent);
 
-    expect(screen.getByText('404. Страница не найдена')).toBeInTheDocument();
-    expect(screen.getByText('Главная страница')).toBeInTheDocument();
+    expect(screen.getByText('Страница не найдена')).toBeInTheDocument();
+    expect(screen.getByText('Вернуться на главную страницу')).toBeInTheDocument();
   });
 });

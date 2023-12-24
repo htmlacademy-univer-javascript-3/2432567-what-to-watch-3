@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createAxios from '../services/api.ts';
 import reducer from './reducer.ts';
 import { redirect } from './middleware/redirect.ts';
+import createAxios from '../services/api.ts';
 
 const axios = createAxios();
 const store = configureStore({

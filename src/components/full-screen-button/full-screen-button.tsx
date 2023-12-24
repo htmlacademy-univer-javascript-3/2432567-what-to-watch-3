@@ -1,7 +1,6 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 
-function FullScreenButton({ onClick }: { onClick: () => void }) {
+function FullScreenButtonComponent({ onClick }: { onClick: () => void }) {
   return (
     <button type="button" className="player__full-screen" onClick={onClick}>
       <svg viewBox="0 0 27 27" width="27" height="27">
@@ -12,4 +11,5 @@ function FullScreenButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-export default React.memo(FullScreenButton);
+const FullScreenButton = React.memo(FullScreenButtonComponent);
+export default FullScreenButton;

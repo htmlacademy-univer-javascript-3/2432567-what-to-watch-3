@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import ShowMoreButton from './show-more-btn';
+import ShowMoreButton from './show-more-button';
 import { withHistory } from '../../mocks/mock-components';
 
 describe('Component: ShowMoreFilmButton', () => {
@@ -8,7 +8,7 @@ describe('Component: ShowMoreFilmButton', () => {
     const textButton = /Show more/i;
 
     const preparedComponent = withHistory(
-      <ShowMoreButton OnClick={onShowMoreFilmButtonClick} />
+      <ShowMoreButton onClick={onShowMoreFilmButtonClick} />
     );
 
     render(preparedComponent);

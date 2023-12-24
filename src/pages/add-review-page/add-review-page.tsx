@@ -4,11 +4,12 @@ import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block/user-block';
 import FormReview from '../../components/form-review/form-review';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import Loading from '../../components/loading/loading';
 import { fetchFilm } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import { FilmType } from '../../schemas/films';
 import { getFilm } from '../../store/films/selectors';
+import Spinner from '../../components/spinner/spinner';
+import { Helmet } from 'react-helmet-async';
 
 function AddReviewPage(): JSX.Element {
   const { id } = useParams();
@@ -17,20 +18,22 @@ function AddReviewPage(): JSX.Element {
   const film = useAppSelector(getFilm) as FilmType;
 
   useEffect(() => {
-    dispatch(fetchFilm(id as string));
-  }, [dispatch, id]);
+    if (id && id !== film?.id) {
+      dispatch(fetchFilm(id));
+    }
+  }, [dispatch, film, id]);
 
   if (film === null) {
-    return <Loading />;
+    return <Spinner />;
   }
   return (
     <section className="film-card film-card--full">
+      <Helmet>
+        <title>{film.name} | Новый отзыв</title>
+      </Helmet>
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img
-            src={film.backgroundImage}
-            alt={film.name}
-          />
+          <img src={film.backgroundImage} alt={film.name} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header">
@@ -52,12 +55,7 @@ function AddReviewPage(): JSX.Element {
           <UserBlock />
         </header>
         <div className="film-card__poster film-card__poster--small">
-          <img
-            src={film.posterImage}
-            alt={film.name}
-            width="218"
-            height="327"
-          />
+          <img src={film.posterImage} alt={film.name} width="218" height="327" />
         </div>
       </div>
       <FormReview film={film} />

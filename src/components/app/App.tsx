@@ -1,18 +1,20 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { HelmetProvider } from 'react-helmet-async';
 import * as pages from './all-pages';
+import { AppRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchFavoriteFilms } from '../../store/api-action/api-action';
-import { useEffect } from 'react';
 import { getAuthorizationStatus } from '../../store/user/selectors';
-import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
-    dispatch(fetchFavoriteFilms());
+    if (authorizationStatus) {
+      dispatch(fetchFavoriteFilms());
+    }
   }, [authorizationStatus, dispatch]);
 
   return (

@@ -4,10 +4,11 @@ function Rating({ setRating }: RatingProps) {
   return (
     <div className="rating">
       <div className="rating__stars">
-        {Array.from({ length: 10 }, (_, i) => i + 1)
+        {Array
+          .from({ length: 10 }, (_, i) => i + 1)
           .reverse()
           .map((number) => (
-            <span key={number}>
+            <span key={`star-${number}`}>
               <input
                 className="rating__input"
                 id={`star-${number}`}

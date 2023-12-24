@@ -1,6 +1,6 @@
 import { AuthorizationStatus } from '../../const';
 import { makeFakeUser } from '../../mocks/mock';
-import { fetchAuthorizationStatus, fetchLogin, fetchLogout } from '../api-action/api-action';
+import { fetchAuthorizationStatus, login, logout } from '../api-action/api-action';
 import { userReducer } from './user';
 import { initialStateProps } from './user.props';
 
@@ -45,38 +45,38 @@ describe('user slice', () => {
   });
 
   describe('login', () => {
-    it('fetchLogin.pending', () => {
+    it('login.pending', () => {
       const expectedState = { ...initialState };
 
-      const result = userReducer(initialState, fetchLogin.pending);
+      const result = userReducer(initialState, login.pending);
 
       expect(result).toEqual(expectedState);
     });
 
-    it('fetchLogin.rejected', () => {
+    it('login.rejected', () => {
       const expectedState = { ...initialState, error: true };
 
-      const result = userReducer(initialState, fetchLogin.rejected);
+      const result = userReducer(initialState, login.rejected);
 
       expect(result).toEqual(expectedState);
     });
 
-    it('fetchLogin.fulfilled', () => {
+    it('login.fulfilled', () => {
       const user = makeFakeUser();
       const expectedState = { ...initialState, user, authorizationStatus: AuthorizationStatus.Auth };
 
-      const result = userReducer(initialState, fetchLogin.fulfilled(user, '', { email: '', password: '' }));
+      const result = userReducer(initialState, login.fulfilled(user, '', { email: '', password: '' }));
 
       expect(result).toEqual(expectedState);
     });
   });
 
-  describe('fetchLogout', () => {
-    it('fetchLogout.fulfilled', () => {
+  describe('logout', () => {
+    it('logout.fulfilled', () => {
       const user = makeFakeUser();
       const expectedState = { ...initialState, authorizationStatus: AuthorizationStatus.NoAuth };
 
-      const result = userReducer({ ...initialState, user }, fetchLogout.fulfilled);
+      const result = userReducer({ ...initialState, user }, logout.fulfilled);
 
       expect(result).toEqual(expectedState);
     });

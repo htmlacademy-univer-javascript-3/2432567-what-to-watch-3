@@ -13,7 +13,7 @@ describe('Component: GenreItem', () => {
 
   it('should render correct', () => {
     const { withStoreComponent } = withStore(
-      <GenreLink genre={mockGenre} activeGenre={mockOtherGenre} onClick={mockOnClick} />,
+      <GenreLink genre={mockGenre} isActiveGenre={mockOtherGenre === mockGenre} onClick={mockOnClick} />,
       makeFakeStore()
     );
     render(withStoreComponent);
@@ -23,7 +23,7 @@ describe('Component: GenreItem', () => {
 
   it('should set active genre on click', async () => {
     const { withStoreComponent } = withStore(
-      <GenreLink genre={mockGenre} onClick={mockOnClick} activeGenre={mockGenre} />,
+      <GenreLink genre={mockGenre} onClick={mockOnClick} isActiveGenre={mockGenre === mockGenre} />,
       makeFakeStore()
     );
 

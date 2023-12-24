@@ -1,8 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
-import { PlayPauseButtonProps } from './play-pause-btn.props';
+import { PlayPauseButtonProps } from './play-pause-button.props';
 
-function PlayPauseButton({ onClick, isPlaying }: PlayPauseButtonProps) {
+function PlayPauseButtonComponent({ onClick, isPlaying }: PlayPauseButtonProps) {
   return (
     <button type="button" className="player__play" onClick={onClick}>
       {isPlaying ? (
@@ -25,4 +24,5 @@ function PlayPauseButton({ onClick, isPlaying }: PlayPauseButtonProps) {
 
 }
 
-export default React.memo(PlayPauseButton);
+const PlayPauseButton = React.memo(PlayPauseButtonComponent);
+export default PlayPauseButton;

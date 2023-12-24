@@ -38,4 +38,12 @@ enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export { AppRoute, TabsType, APIRoutes, NameSpace, AuthorizationStatus };
+const COUNT_FILMS_SHOWN = 8;
+const DEFAULT_GENRE = 'All genres';
+const COUNT_MAX_GENRES = 10;
+const LENGTH_TEXT_REVIEW = {
+  MIN: 50,
+  MAX: 400,
+};
+
+export { AppRoute, TabsType, APIRoutes, NameSpace, AuthorizationStatus, COUNT_FILMS_SHOWN, DEFAULT_GENRE, COUNT_MAX_GENRES, LENGTH_TEXT_REVIEW };

@@ -1,11 +1,28 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 function NotFoundScreen(): JSX.Element {
+  const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    navigate(AppRoute.Main);
+  };
+
   return (
     <>
-      <h1>404. Страница не найдена</h1>
-      <Link to={AppRoute.Main} data-testid='link-main-page'>Главная страница</Link >
+      <Helmet>
+        <title>404</title>
+      </Helmet>
+      <p className="error__text">Страница не найдена</p>
+      <button
+        onClick={handleButtonClick}
+        className="replay replay--error"
+        type="button"
+        data-testid='link-main-page'
+      >
+        Вернуться на главную страницу
+      </button>
     </>
   );
 }

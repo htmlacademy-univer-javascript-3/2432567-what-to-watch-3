@@ -1,14 +1,15 @@
-import findGenres from '../../utils/get-genres';
 import { makeFakeFilm, makeFakeFilmInList, makeFakeFilms, makeFakePromoFilm } from '../../mocks/mock';
 import { addFavoriteFilm, dropFavoriteFilm, fetchFavoriteFilms, fetchFilm, fetchFilmPromo, fetchFilms } from '../api-action/api-action';
 import { filmsActions, filmsReducer } from './films';
 import { initialStateProps } from './films.props';
 import { FilmInListType } from '../../schemas/films';
+import { findGenres } from '../../utils/utils';
+import { DEFAULT_GENRE } from '../../const';
 
 describe('films slice', () => {
   const initialState: initialStateProps = {
     genres: [],
-    activeGenre: 'All genres',
+    activeGenre: DEFAULT_GENRE,
     film: null,
     films: [],
     filmPromo: null,

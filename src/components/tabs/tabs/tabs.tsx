@@ -8,7 +8,7 @@ import { FilmType } from '../../../schemas/films';
 
 function Tabs({ film }: { film: FilmType }): JSX.Element {
   const [activeTab, setActiveTab] = useState<TabsType>(TabsType.Overview);
-  const handlerOnClick = (evt: SyntheticEvent) => {
+  const handleTabClick = (evt: SyntheticEvent) => {
     const newTab = evt.currentTarget.id as TabsType;
     if (newTab) {
       setActiveTab(newTab);
@@ -25,9 +25,9 @@ function Tabs({ film }: { film: FilmType }): JSX.Element {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <TabLink tab={TabsType.Overview} onClick={handlerOnClick} activeTab={activeTab} />
-          <TabLink tab={TabsType.Details} onClick={handlerOnClick} activeTab={activeTab} />
-          <TabLink tab={TabsType.Reviews} onClick={handlerOnClick} activeTab={activeTab} />
+          <TabLink tab={TabsType.Overview} onClick={handleTabClick} activeTab={activeTab} />
+          <TabLink tab={TabsType.Details} onClick={handleTabClick} activeTab={activeTab} />
+          <TabLink tab={TabsType.Reviews} onClick={handleTabClick} activeTab={activeTab} />
         </ul>
       </nav>
       {tabs[activeTab]}
