@@ -7,15 +7,18 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { fetchFilm } from '../../store/api-action/api-action';
 import { useEffect } from 'react';
 import { FilmType } from '../../schemas/films';
-import { getFilm } from '../../store/films/selectors';
+import { getErrorFilm, getFilm, getStatusLoading } from '../../store/films/selectors';
 import Spinner from '../../components/spinner/spinner';
 import { Helmet } from 'react-helmet-async';
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function AddReviewPage(): JSX.Element {
   const { id } = useParams();
 
   const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm) as FilmType;
+  const error = useAppSelector(getErrorFilm) as boolean;
+  const statusLoading = useAppSelector(getStatusLoading);
 
   useEffect(() => {
     if (id && id !== film?.id) {
@@ -23,7 +26,10 @@ function AddReviewPage(): JSX.Element {
     }
   }, [dispatch, film, id]);
 
-  if (film === null) {
+  if (error) {
+    return <NotFoundPage />;
+  }
+  if (statusLoading) {
     return <Spinner />;
   }
   return (

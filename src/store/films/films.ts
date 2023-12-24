@@ -14,14 +14,17 @@ const initialState: initialStateProps = {
   filmPromo: null,
   similarFilms: [],
   favoriteFilms: [],
+  statusLoading: false,
   hasError: false,
 };
 
 const pending = (state: initialStateProps) => {
+  state.statusLoading = true;
   state.hasError = false;
 };
 
 const rejected = (state: initialStateProps) => {
+  state.statusLoading = false;
   state.hasError = true;
 };
 
@@ -46,18 +49,24 @@ const { reducer: filmsReducer, actions: filmsActions } = createSlice({
       .addCase(fetchFilms.pending, pending)
       .addCase(fetchFilms.rejected, rejected)
       .addCase(fetchFilms.fulfilled, (state, action) => {
+        state.statusLoading = false;
+
         state.films = action.payload;
         state.genres = findGenres(action.payload);
       })
       .addCase(fetchFilmPromo.pending, pending)
       .addCase(fetchFilmPromo.rejected, rejected)
       .addCase(fetchFilmPromo.fulfilled, (state, action) => {
+        state.statusLoading = false;
+
         state.filmPromo = action.payload;
       })
       .addCase(fetchFilm.pending, pending)
       .addCase(fetchFilm.rejected, rejected)
       .addCase(fetchFilm.fulfilled, (state, action) => {
         const { film, similarFilms } = action.payload;
+        state.statusLoading = false;
+
         state.film = film;
         state.similarFilms = similarFilms;
       })

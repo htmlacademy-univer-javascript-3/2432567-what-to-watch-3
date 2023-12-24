@@ -10,6 +10,7 @@ const getCountFavoriteFilms = (state: Pick<State, NameSpace.Film>): number => st
 const getFavoriteFilms = (state: Pick<State, NameSpace.Film>): FilmInListType[] => state[NameSpace.Film].favoriteFilms;
 const getGenres = (state: Pick<State, NameSpace.Film>): Genre[] => state[NameSpace.Film].genres;
 const getActiveGenre = (state: Pick<State, NameSpace.Film>): Genre => state[NameSpace.Film].activeGenre;
+const getStatusLoading = (state: Pick<State, NameSpace.Film>): boolean => state[NameSpace.Film].statusLoading;
 const getErrorFilm = (state: Pick<State, NameSpace.Film>): boolean => state[NameSpace.Film].hasError;
 
-export { getFilms, getFilm, getFavoriteFilms, getFilmPromo, getSimilarFilms, getGenres, getActiveGenre, getErrorFilm, getCountFavoriteFilms };
+export { getFilms, getFilm, getFavoriteFilms, getFilmPromo, getSimilarFilms, getGenres, getActiveGenre, getErrorFilm, getCountFavoriteFilms, getStatusLoading };

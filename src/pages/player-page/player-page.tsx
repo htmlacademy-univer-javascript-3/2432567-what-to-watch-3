@@ -4,7 +4,7 @@ import { FilmType } from '../../schemas/films';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import NotFoundPage from '../not-found-page/not-found-page';
 import { fetchFilm } from '../../store/api-action/api-action';
-import { getErrorFilm, getFilm } from '../../store/films/selectors';
+import { getErrorFilm, getFilm, getStatusLoading } from '../../store/films/selectors';
 import ProgressBar from '../../components/progress-bar/progress-bar';
 import PlayPauseButton from '../../components/play-pause-button/play-pause-button';
 import FullScreenButton from '../../components/full-screen-button/full-screen-button';
@@ -18,6 +18,7 @@ function PlayerPage(): JSX.Element {
 
   const film = useAppSelector(getFilm) as FilmType;
   const error = useAppSelector(getErrorFilm) as boolean;
+  const statusLoading = useAppSelector(getStatusLoading);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -76,7 +77,7 @@ function PlayerPage(): JSX.Element {
   if (error) {
     return <NotFoundPage />;
   }
-  if (!film) {
+  if (statusLoading) {
     return <Spinner />;
   }
   return (
